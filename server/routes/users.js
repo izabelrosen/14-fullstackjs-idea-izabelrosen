@@ -51,9 +51,15 @@ router.get('/:id', function(req, res) {
     });
 });
 
-// Update user
+// Update user and if it does not exist -> creates a new user
 router.put('/:id', function(req, res) {
-    
+    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(error, user) {
+        if(error) {
+            return res.status(500).send("An error occured while trying to update a user from db.");
+        } else {
+            res.status(200).send("User " + user.name + " was successfully updated");
+        }
+    })
 });
 
 // Delete user
