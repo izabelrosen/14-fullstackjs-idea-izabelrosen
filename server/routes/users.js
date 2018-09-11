@@ -58,7 +58,13 @@ router.put('/:id', function(req, res) {
 
 // Delete user
 router.delete('/:id', function(req, res) {
-    
+    User.findByIdAndRemove(req.params.id, function(error, user) {
+        if(error) {
+            return res.status(500).send("An error occured while trying to delete a user from db...");
+        } else {
+            res.status(200).send("User " + user.name + " was successfully deleted!");
+        }
+    })
 });
 
 module.exports = router;
