@@ -23,7 +23,13 @@ router.post('/', function(req, res) {
 
 // Read, get users
 router.get('/', function(req, res) {
-    
+    User.find({}, function(error, users) {
+        if(error) {
+            return res.status(500).send("An error occured, could not get users from db.");
+        } else {
+            res.status(200).send(users);
+        }
+    })
 });
 
 // Read - get specific user
