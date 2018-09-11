@@ -34,7 +34,21 @@ router.get('/', function(req, res) {
 
 // Read - get specific user
 router.get('/:id', function(req, res) {
-
+    User.findById(req.params.id)
+    .exec()
+    .then(user => {
+        if(!user) {
+            res.status(500).json({
+                message: "No user found"
+            });
+        }
+        res.status(200).json(user);
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
 });
 
 // Update user
