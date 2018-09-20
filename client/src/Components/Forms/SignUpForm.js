@@ -11,7 +11,7 @@ export class SignUpForm extends Component {
 
   render() {
     return (
-      <div className="signin">
+      <div className="signup">
       <h1>SIGN UP</h1>
         <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <TextField
@@ -21,10 +21,6 @@ export class SignUpForm extends Component {
         <TextField
           hintText="First name"
           floatingLabelText="First name"
-        />
-        <TextField
-          hintText="Last name"
-          floatingLabelText="Last name"
         />
         <TextField
           hintText="Username"
