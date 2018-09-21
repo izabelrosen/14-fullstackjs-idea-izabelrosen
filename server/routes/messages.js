@@ -55,5 +55,14 @@ router.get('/:id', function(req, res) {
 // Update - no?
 
 // Delete a message
+router.delete('/:id', function(req, res) {
+    Message.findByIdAndRemove(req.params.id, function(error, message) {
+        if(error) {
+            return res.status(500).send('An error occured while trying to delete message: ' + message.text)
+        } else {
+            res.status(200).send('Message ' + message.text + ' was successfully deleted.');
+        }
+    })
+});
 
 module.exports = router;
