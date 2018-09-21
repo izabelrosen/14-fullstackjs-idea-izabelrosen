@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// TODO: This does not work. Must be a string? 
+// TODO: This does not work. Must be a string?
 // const mongoUser = process.env.MONGO_USER;
 // const mongoPassword = process.env.MONGO_PASSWORD;
 const mongoose = require('mongoose');
-var mongodbUri ='mongodb://@ds151892.mlab.com:51892/prattle';
+const mongodbUri ='mongodb://@ds151892.mlab.com:51892/prattle';
 
 mongoose.connect(mongodbUri, {
   useNewUrlParser: true,
@@ -15,7 +15,7 @@ mongoose.connect(mongodbUri, {
     }
 })
 
-var conn = mongoose.connection;    
+const conn = mongoose.connection;    
 conn.on('error', console.error.bind(console, 'connection error:'));  
  
 conn.once('open', () =>{
@@ -24,6 +24,7 @@ conn.once('open', () =>{
 
 const index = require('./routes/index');
 const users = require('./routes/users');
+const messages = require('./routes/messages');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/messages', messages);
 
 app.use(function(error, req, res, next) {
     res.status(error.status || 500).send({'error': 'Oups something went wrong!'})
