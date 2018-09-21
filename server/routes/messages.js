@@ -17,7 +17,7 @@ router.post('/', function(req, res) {
             });
         }
         res.status(200).send({
-            message: 'New message successfully created', messages
+            message: 'New message successfully created: ' + messages.text
         });
     })
 });
@@ -34,6 +34,23 @@ router.get('/', function(req, res) {
 });
 
 // Read - get messages by id
+router.get('/:id', function(req, res) {
+    Message.findById(req.params.id)
+    .exec()
+    .then(message => {
+        if(!message) {
+            res.status(500).json({
+                message: 'No message found...'
+            });
+        }
+        res.status(200).json(message);
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+});
 
 // Update - no?
 
