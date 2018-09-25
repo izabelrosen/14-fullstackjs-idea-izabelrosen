@@ -27,6 +27,7 @@ router.post('/register', function(req, res) {
         .send('An error occured while trying to register a user' + error)
       } else {
         // create a JWT token, _id is default in mongo. config.secret = private key
+        // jwt.sign takes a payload, an object with id, and secret key from config.js
         var token = jwt.sign({ id: user._id}, config.secret, {
             expiresIn: 86400 //valid 24h
         });
