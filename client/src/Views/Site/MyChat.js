@@ -1,9 +1,9 @@
 import React from 'react';
-import { MyChatForm } from '../../Components/Forms/MyChatForm';
+import { CreateMessage } from '../../Components/Forms/CreateMessage';
 
 const MyChat = () => {
     return (
-        <MyChatForm />
+        <CreateMessage />
     )
 }
 

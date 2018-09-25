@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../Components/App.css';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from '@material-ui/core/Button';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -11,8 +11,19 @@ export default class Home extends Component {
       <div className="Home">
         <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <h1>THIS IS HOME</h1>
-            <RaisedButton href="/signin" className="home__signin--button" label="Sign in" primary={true} />
-            <RaisedButton href="/signup" className="home__signup--button" label="Sign up" secondary={true} />
+
+        <Button variant="outlined" 
+          href="/signin"
+          color="primary">
+           SIGN IN
+        </Button>
+
+        <Button variant="outlined"
+          href="/signup" 
+          color="secondary">
+           SIGN UP
+        </Button>
+
         </MuiThemeProvider>
       </div>
     );
