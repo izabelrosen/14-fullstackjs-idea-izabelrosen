@@ -23,6 +23,7 @@ conn.once('open', () =>{
 });
 
 const index = require('./routes/index');
+const auth = require('./controllers/AuthController');
 const users = require('./controllers/UserController');
 const messages = require('./controllers/MessageController');
 
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', index);
+app.use('/auth', auth);
 app.use('/users', users);
 app.use('/messages', messages);
 
