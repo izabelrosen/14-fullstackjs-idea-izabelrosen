@@ -7,6 +7,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Home from '.././Views/Site/Home';
 import SignIn from '../Views/Site/SignIn';
 import SignUp from '../Views/Site/SignUp'
+import AllChats from '../Views/Site/AllChats';
+import MyChat from '../Views/Site/MyChat';
 
 import {
   BrowserRouter as Router,
@@ -25,17 +27,6 @@ const muiTheme = getMuiTheme({
   },
 });
 
-// MuiThemeProvider takes the theme as a property and passed it down the hierarchy.
-// const App = () => (
-//   <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-//   <div className="App">
-//     <Header />
-//       <h1>PRATTLE</h1>
-//       <p>A simple way to connect with your friends! PSST! All secretly...</p>
-//     </div>
-//   </MuiThemeProvider>
-// );
-
 class App extends Component {
   render() {
     return (
@@ -47,11 +38,15 @@ class App extends Component {
              <li><Link to="/">Hello Home</Link></li>
              <li><Link to="/signin">Sign In</Link></li>
              <li><Link to="/signup">Sign Up</Link></li>
+             <li><Link to="/allchats">All my chats</Link></li>
+             <li><Link to="/mychat">My Chat</Link></li>
           </ul>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
+            <Route path="/allchats" component={AllChats} />
+            <Route path="/mychat" component={MyChat} />
           </Switch>
           </div>
         </div>
