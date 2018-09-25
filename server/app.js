@@ -39,7 +39,7 @@ app.use(function(error, req, res, next) {
     res.status(error.status || 500).send({'error': 'Oups something went wrong!'})
 });
 
-app.listen(3000);
-console.log('Magic is happening over at 3000');
+app.listen(3333);
+console.log('Magic is happening over at 3333');
 
 module.exports = app;
