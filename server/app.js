@@ -23,8 +23,8 @@ conn.once('open', () =>{
 });
 
 const index = require('./routes/index');
-const users = require('./routes/users');
-const messages = require('./routes/messages');
+const users = require('./controllers/UserController');
+const messages = require('./controllers/MessageController');
 
 const app = express();
 
