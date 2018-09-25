@@ -20,20 +20,20 @@
 
 //Node index
 
-var express = require('express');
-var app = express();
-var db = require('./db.js');
+// var express = require('express');
+// var app = express();
+// // var db = require('./db.js');
 
-var UserController = require('./controllers/UserController');
+// var UserController = require('./controllers/UserController');
 
-app.use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "x-access-token, Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    });
+// app.use(function(req, res, next) {
+//         res.header("Access-Control-Allow-Origin", "*");
+//         res.header("Access-Control-Allow-Headers", "x-access-token, Origin, X-Requested-With, Content-Type, Accept");
+//         next();
+//     });
 
-// Prefix the routes
-app.use('/', index);
-app.use('/users', UserController);
+// // Prefix the routes
+// app.use('/', index);
+// app.use('/users', UserController);
 
-module.exports = app; //because it isnt ES6, have to export this way. common.js,
+// module.exports = app; //because it isnt ES6, have to export this way. common.js,
