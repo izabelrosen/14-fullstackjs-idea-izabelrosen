@@ -32,16 +32,47 @@ router.post('/register', function(req, res) {
             expiresIn: 86400 //valid 24h
         });
 
-        res.status(200)
-        .send({ authenticated: true, token: token, user:user });
+        res.status(200).send({ 
+          authenticated: true, 
+          token: token, 
+          user: user 
+          });
         }
     }
   );
 });
 
 // login
+router.post('/login', function(req, res) {
+  User.findOne({ email: req.body.email}, function(error, user) {
+    if(error) 
+      return res.status(500)
+      .send('An error occured while trying to log in');
 
-// me
+    if(!user) 
+      return res.status(404)
+      .send('No registered user found with this email, try again!');
+
+    const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+    if(!passwordIsValid) 
+      return res.status(401)
+      .send({ 
+        authenticated: false,
+        token: null
+      });
+
+    const token = jwt.sign({ id: user._id }, config.secret, {
+      expiresIn: 86400
+    });
+
+    res.status(200).send({
+      authenticated: true,
+      token: token
+    });
+  });
+});
+
+// me: get info about the auth user
 // apply tokenverify middleware, run and execute before the callback -> access to req.userid
 router.get('/me', TokenVerify, function(req, res) {
   User.findById(req.userId, { password: 0 }, function(error, user) {
