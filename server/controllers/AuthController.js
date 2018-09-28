@@ -8,6 +8,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('../config');
+const TokenVerify = require('../middleware/TokenVerify');
 
 // register
 router.post('/register', function(req, res) {
@@ -22,24 +23,43 @@ router.post('/register', function(req, res) {
   
     function(error, user) {
       if(error) {
-        return 
-        res.status(500)
-        .send('An error occured while trying to register a user' + error)
+        return res.status(500)
+        .send('An error occured while trying to register a user ' + error)
       } else {
         // create a JWT token, _id is default in mongo. config.secret = private key
         // jwt.sign takes a payload, an object with id, and secret key from config.js
         var token = jwt.sign({ id: user._id}, config.secret, {
             expiresIn: 86400 //valid 24h
         });
+
         res.status(200)
-        .send({ authecticated: true, token: token, user:user });
+        .send({ authenticated: true, token: token, user:user });
         }
-  });
+    }
+  );
 });
 
 // login
 
 // me
 // apply tokenverify middleware, run and execute before the callback -> access to req.userid
+router.get('/me', TokenVerify, function(req, res) {
+  User.findById(req.userId, { password: 0 }, function(error, user) {
+    if (error) {
+      return res
+      .status(500)
+      .send('An error occured while trying to find the user.');
+    }
+    if (!user) {
+      return res.status(404)
+      .send('User not found');
+    }
+
+    return res.status(200).send({ 
+      authenticated: true, 
+      user: user
+    });
+  });
+});
 
 module.exports = router;
