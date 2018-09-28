@@ -29,15 +29,12 @@ UserSchema.pre('save', function(next) {
     bcrypt.genSalt(roundsOfSalt, function(error, salt) {
         if (error) return next(error);
 
-        user.password = hash;
-        next();
-        // Next: continues if everything went well
+        bcrypt.hash(user.password, salt, function(error, hash) {
+            if (error) return next(error);
+            user.password = hash;
+            next();
+        });
     })
-
-    // if(!user) return next(error)
-    // console.log(user)
-    // var roundsOfSalt = 5;
-    // return next();
-})
+});
 
 module.exports = mongoose.model('User', UserSchema);
