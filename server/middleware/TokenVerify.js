@@ -6,15 +6,15 @@ function tokenVerify (req, res, next) {
 
   if(!token) {
     return res.status(401).send({
-      auth: false,
+      authenticated: false,
       message: 'Unauthorized. No token provided.'
     });
   }
 
-  jwt.verify(token, config.secret, function(error, decoded) {
+  jwt.verify(token, config.secret, function(error, decodedToken) {
     if(error) {
-      return res.status(500).send({
-        auth: false,
+      res.status(500).send({
+        authenticated: false,
         message: 'An error occured while trying to authenticate token.'
       });
     }
@@ -25,3 +25,4 @@ function tokenVerify (req, res, next) {
 }
 
 module.exports = tokenVerify;
+
