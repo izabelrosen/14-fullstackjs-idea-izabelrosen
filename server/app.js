@@ -1,5 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+// WIP: detta ska skrivas ut i terminalen
+io.on('connection', function(socket) {
+    console.log('A user is connected! YAY');
+});
+
+
 
 // TODO: This does not work. Must be a string?
 // const mongoUser = process.env.MONGO_USER;
@@ -27,7 +37,8 @@ const auth = require('./controllers/AuthController');
 const users = require('./controllers/UserController');
 const messages = require('./controllers/MessageController');
 
-const app = express();
+// Add express to use the routes??
+// const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
