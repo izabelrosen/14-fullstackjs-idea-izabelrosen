@@ -7,11 +7,8 @@ const Message = require('../models/Message');
 router.post('/', function(req, res) {
     const newMessage = new Message();
     newMessage.text = req.body.text;
-    debugger;
     newMessage.save(function(error, messages) {
-        debugger;
         if (error) {
-            debugger;
             res.status(500).send({
                 message: error
             });

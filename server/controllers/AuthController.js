@@ -61,6 +61,7 @@ router.post('/login', function(req, res) {
         token: null
       });
 
+    // if the passwords match -> signs a token
     const token = jwt.sign({ id: user._id }, config.secret, {
       expiresIn: 86400
     });
