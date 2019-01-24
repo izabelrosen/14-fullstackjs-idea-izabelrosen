@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 // Describes a user
 var UserSchema = new mongoose.Schema({
     name: {type: String, maxlength:[100, 'Uhm your name is too long, try again!']},
+    admin: {type: Boolean, default: false},
     username: {type: String, maxlength:[80, 'Try a shorter username!']},
     email: String,
     password: {type: String, minlength: [4, 'Password must contain at least 8 characters']},
