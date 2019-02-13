@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import '../../Components/App';
+import '../App';
 import TextField from 'material-ui/TextField';
 import Button from '@material-ui/core/Button';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 
+/*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 export class SignInForm extends Component {
-
   render() {
     return (
       <div className="signin">
@@ -26,11 +26,10 @@ export class SignInForm extends Component {
         <Button variant="outlined" color="primary">
           SIGN IN
         </Button>
-            
         </MuiThemeProvider>
       </div>
     );
   }
 }
 
-export default withRouter (SignInForm);
+export default withRouter(SignInForm);

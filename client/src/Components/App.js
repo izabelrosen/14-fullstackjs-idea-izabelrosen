@@ -1,32 +1,33 @@
-import React, {Component} from 'react';
-import Header from './Header';
-import {cyan500} from 'material-ui/styles/colors';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Home from '.././Views/Site/Home';
-import SignIn from '../Views/Site/SignIn';
-import SignUp from '../Views/Site/SignUp'
-import AllChats from '../Views/Site/AllChats';
-import MyChat from '../Views/Site/MyChat';
-
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Link,
   Switch,
-  Redirect
-} from 'react-router-dom'
+  // Redirect
+} from 'react-router-dom';
+// import { cyan500 } from 'material-ui/styles/colors';
+// import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Header from './Header';
+import Home from '../Views/Site/Home';
+import SignIn from '../Views/Site/SignIn';
+import SignUp from '../Views/Site/SignUp';
+import AllChats from '../Views/Site/AllChats';
+import MyChat from '../Views/Site/MyChat';
 
-const muiTheme = getMuiTheme({
-  palette: {
-    textColor: cyan500,
-  },
-  appBar: {
-    height: 50,
-  },
-});
 
+// const muiTheme = getMuiTheme({
+//   palette: {
+//     textColor: cyan500,
+//   },
+//   appBar: {
+//     height: 50,
+//   },
+// });
+
+/*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 class App extends Component {
   render() {
     return (
@@ -51,7 +52,7 @@ class App extends Component {
           </div>
         </div>
       </Router>
-    )
+    );
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../Components/App';
+import '../App';
 import { withRouter } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import Button from '@material-ui/core/Button';
@@ -7,8 +7,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
+/*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 export class SignUpForm extends Component {
-
   render() {
     return (
       <div className="signup">
@@ -42,4 +42,4 @@ export class SignUpForm extends Component {
   }
 }
 
-export default withRouter (SignUpForm);
+export default withRouter(SignUpForm);

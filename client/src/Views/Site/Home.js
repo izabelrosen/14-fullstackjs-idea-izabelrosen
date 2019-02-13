@@ -5,6 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
+/*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 export default class Home extends Component {
   render() {
     return (
@@ -12,14 +13,14 @@ export default class Home extends Component {
         <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <h1>THIS IS HOME</h1>
 
-        <Button variant="outlined" 
+        <Button variant="outlined"
           href="/signin"
           color="primary">
            SIGN IN
         </Button>
 
         <Button variant="outlined"
-          href="/signup" 
+          href="/signup"
           color="secondary">
            SIGN UP
         </Button>
