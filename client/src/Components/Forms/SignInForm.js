@@ -18,11 +18,14 @@ export class SignInForm extends Component {
           hintText="Email"
           floatingLabelText="Enter your email"
         />
+        <br />
         <TextField
           hintText="Password"
           floatingLabelText="Password"
           type="password"
         />
+        <br />
+        <br />
         <Button variant="outlined" color="primary">
           SIGN IN
         </Button>

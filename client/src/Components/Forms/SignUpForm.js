@@ -18,20 +18,23 @@ export class SignUpForm extends Component {
           hintText="Email"
           floatingLabelText="Enter your email"
         />
-        <TextField
+        <br />
+        {/* <TextField
           hintText="Name"
           floatingLabelText="Name"
-        />
+        /> */}
         <TextField
           hintText="Username"
           floatingLabelText="Username"
         />
+        <br />
         <TextField
           hintText="Password Field"
           floatingLabelText="Password"
           type="password"
         />
-
+        <br />
+        <br />
         <Button variant="outlined" color="secondary">
           SIGN UP
         </Button>
