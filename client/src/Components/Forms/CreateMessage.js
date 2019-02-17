@@ -10,7 +10,7 @@ export class CreateMessage extends Component {
     super(props);
 
     this.state = {
-      message: '',
+      text: '',
     };
     // this.createMessage = this.createMessage.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -25,15 +25,15 @@ export class CreateMessage extends Component {
     e.preventDefault();
     console.log('Send button triggered');
 
-    const message = {
-      message: this.state.message,
+    const text = {
+      text: this.state.text,
     };
     fetch('http://localhost:3003/messages', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify(message),
+      body: JSON.stringify(text),
     })
       .then(res => res.json())
       .then(data => console.log(data));
@@ -51,9 +51,9 @@ export class CreateMessage extends Component {
         <form onSubmit={this.onSubmit}>
         <TextField
         id="standard-textarea"
-        name="message"
+        name="text"
         onChange = { this.onChange }
-        value = { this.state.message }
+        value = { this.state.text }
         placeholder="Message"
         multiline
         margin="normal"
