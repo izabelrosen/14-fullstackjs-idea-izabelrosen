@@ -12,11 +12,25 @@ export class CreateMessage extends Component {
     this.state = {
       message: '',
     };
-    this.createMessage = this.createMessage.bind(this);
+    // this.createMessage = this.createMessage.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    console.log('Send button triggered');
+
+    const message = {
+      message: this.state.message,
+    };
   }
 
   createMessage() {
-    console.log('Send button triggered');
   }
 
   render() {
@@ -27,16 +41,23 @@ export class CreateMessage extends Component {
         <h1>Write a message</h1>
         <TextField
         id="standard-textarea"
+        name="message"
+        onChange = { this.onChange }
+        value = { this.state.message }
         placeholder="Message"
         multiline
         margin="normal"
         />
 
-        <Button variant="outlined"
+        <Button
+        type="submit"
+        variant="outlined"
         className="createMessage__send-button"
-        label="Send" primary={true}
-        onClick={this.createMessage}>Send</Button>
-
+        label="Send"
+        primary={true}
+        // onClick={this.createMessage}
+        onSubmit={this.onSubmit}
+        >Send</Button>
       </div>
     );
   }
