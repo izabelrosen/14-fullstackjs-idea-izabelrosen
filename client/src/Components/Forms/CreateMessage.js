@@ -28,6 +28,15 @@ export class CreateMessage extends Component {
     const message = {
       message: this.state.message,
     };
+    fetch('http://localhost:3003/messages', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(message),
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
   }
 
   createMessage() {
@@ -39,6 +48,7 @@ export class CreateMessage extends Component {
     return (
       <div className="createMessage__form">
         <h1>Write a message</h1>
+        <form onSubmit={this.onSubmit}>
         <TextField
         id="standard-textarea"
         name="message"
@@ -58,6 +68,7 @@ export class CreateMessage extends Component {
         // onClick={this.createMessage}
         onSubmit={this.onSubmit}
         >Send</Button>
+        </form>
       </div>
     );
   }
