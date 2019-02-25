@@ -6,6 +6,8 @@ import {
   Switch,
   // Redirect
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../Store';
 // import { cyan500 } from 'material-ui/styles/colors';
 // import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -31,6 +33,7 @@ import MyChat from '../Views/Site/MyChat';
 class App extends Component {
   render() {
     return (
+      <Provider store = { store }>
       <Router>
         <div className="App">
         <Header />
@@ -52,6 +55,7 @@ class App extends Component {
           </div>
         </div>
       </Router>
+      </Provider>
     );
   }
 }
