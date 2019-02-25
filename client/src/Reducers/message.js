@@ -22,8 +22,14 @@ const initialState = {
 // action is an object and will have a type
 // look at what type is being passed
 // default for now because the action does not take anything in yet
+// the action payload comes from the message/action
 export default function (state = initialState, action) {
   switch (action.type) {
+    case FETCH_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        items: action.payload,
+      };
     default:
       return state;
   }
