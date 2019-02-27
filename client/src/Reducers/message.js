@@ -16,6 +16,7 @@ import {
 const initialState = {
   messages: [],
   message: {},
+  isFetching: false,
 };
 
 // takes in the state and action will incl a type
@@ -23,14 +24,30 @@ const initialState = {
 // look at what type is being passed
 // default for now because the action does not take anything in yet
 // the action payload comes from the message/action
-export default function (state = initialState, action) {
+export const messages = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_MESSAGES_SUCCESS:
+    case FETCH_MESSAGES_START:
       return {
         ...state,
-        items: action.payload,
+        isFetching: true,
       };
+
+    case FETCH_MESSAGES_SUCCESS:
+      console.log('reducer');
+      return {
+        ...state,
+        messages: action.payload,
+        isFetching: false,
+      };
+
+    case FETCH_MESSAGES_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+      };
+
     default:
       return state;
   }
-}
+};
+export default messages;
