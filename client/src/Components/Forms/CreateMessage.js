@@ -25,7 +25,7 @@ export class CreateMessage extends Component {
     e.preventDefault();
     console.log('Send button triggered');
 
-    const text = {
+    const message = {
       text: this.state.text,
     };
     fetch('http://localhost:3003/messages', {
@@ -33,7 +33,7 @@ export class CreateMessage extends Component {
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify(text),
+      body: JSON.stringify(message),
     })
       .then(res => res.json())
       .then(data => console.log(data));
