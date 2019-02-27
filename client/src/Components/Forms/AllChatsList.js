@@ -1,33 +1,65 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../App';
 import { withRouter } from 'react-router-dom';
-// import TextField from 'material-ui/TextField';
-// import RaisedButton from 'material-ui/RaisedButton';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import { connect } from 'react-redux';
+import { fetchMessages } from '../../Actions/message';
+// import message from '../../Reducers/message';
+// import Avatar from '@material-ui/core/Avatar';
 
-// import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-// import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-// import Grid from '@material-ui/core/Grid';
-// import Typography from '@material-ui/core/Typography';
+// For some reason the eslint camelcase doesnt allow to use the one beneath, therefore add disable
+// /* eslint camelcase: ["error", {allow: ["UNSAFE_componentWillMount"]}] */
+/* eslint-disable */
 
-/*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
-export class AllChatsList extends Component {
+class AllChatsList extends Component {
+  UNSAFE_componentWillMount() {
+    // let { dispatch } = this.props;
+    // dispatch(fetchMessages());
+    this.props.fetchMessages();
+  }
+
+  // *** STATE FROM HERE BEFORE PROPS ***
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     messages: [],
+  //   };
+  // }
+
+  // componentDidMount() {
+  //   this.setState({
+
+  //   });
+  //   fetch('http://localhost:3003/messages')
+  //     .then(res => res.json())
+  //     .then(data => this.setState({ messages: data }));
+  // }
+  // *** UNTIL HERE ***
+
   render() {
+    console.log(this.props);
+    const messageItems = this.props.messages.map(message => (
+      <div key={message.id}>
+        <h3>{message.text}</h3>
+      </div>
+    ));
     return (
-      <div className="allchatslist">
-      <h1>ALL MY CHATS</h1>
-
-      <Avatar>OP</Avatar>
-      <p>Chat message goes here, next to avatar. </p>
-
-    </div>
+      <div>
+      <h3>här är alla meddelanden</h3>
+      {messageItems}
+      </div>
     );
   }
 }
+// messages from the root reducer, items from message reducer
+// AllChatsList.propTypes = { fetchMessages: PropTypes.func.isRequired };
+AllChatsList.propTypes = {
+  fetchMessages: PropTypes.func.isRequired,
+  messages: PropTypes.array.isRequired
+};
 
-export default withRouter(AllChatsList);
+const mapStateToProps = state => ({
+  messages: state.messages.messages,
+});
+export default connect(mapStateToProps, { fetchMessages })(AllChatsList);
+
