@@ -11,7 +11,7 @@ import {
 // thunk middleware: call the dispatch function = make async req
 // dispatch: is like a resolver/promise: want to send data call dispatch
 // pass in the type and payload and create the fetch
-
+// add error message
 
 const url = `${process.env.REACT_APP_API_BASE_URL}/messages`;
 
@@ -28,24 +28,35 @@ export const rejectedMessages = () => ({
   type: FETCH_MESSAGES_FAILURE,
 });
 
+export const fetchMessages = () => (dispatch) => {
+  console.log('fetching messages');
+  fetch(url)
+    .then(res => res.json())
+    .then(messages => dispatch(receiveMessages(messages)));
+  // ADD ERROR HANDLING
+  // .catch(error => dispatch(rejectedMessages()));
+};
+
 // export const fetchMessages = () => (dispatch) => {
+//   console.log('fetching messages?');
 //   dispatch(requestMessages());
+
 //   return fetch(url)
 //     .then(res => res.json())
-//     .then((messages) => {
+//     .then(messages => {
 //       dispatch(receiveMessages(messages));
 //     })
-//     .catch((error) => {
-//       console.log(error);
+//     .catch(error => {
 //       dispatch(rejectedMessages());
 //     });
 // };
 
-export const fetchMessages = () => (dispatch) => {
-  fetch(url)
-    .then(res => res.json())
-    .then(messages => dispatch({
-      type: FETCH_MESSAGES_SUCCESS,
-      payload: messages,
-    }));
-};
+// export const fetchMessages = () => (dispatch) => {
+//   console.log('fetching messages?');
+//   fetch('http://localhost:3003/messages')
+//     .then(res => res.json())
+//     .then(messages => dispatch({
+//       type: FETCH_MESSAGES_SUCCESS,
+//       payload: messages,
+//     }));
+// };
