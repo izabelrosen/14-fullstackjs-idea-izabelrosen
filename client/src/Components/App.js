@@ -19,17 +19,8 @@ import SignUp from '../Views/Site/SignUp';
 import AllChats from '../Views/Site/AllChats';
 import MyChat from '../Views/Site/MyChat';
 
-
-// const muiTheme = getMuiTheme({
-//   palette: {
-//     textColor: cyan500,
-//   },
-//   appBar: {
-//     height: 50,
-//   },
-// });
-
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
+
 class App extends Component {
   render() {
     return (
@@ -55,7 +46,7 @@ class App extends Component {
           </div>
         </div>
       </Router>
-      // </Provider>
+    // </Provider>
     );
   }
 }
