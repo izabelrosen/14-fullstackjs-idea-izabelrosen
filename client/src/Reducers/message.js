@@ -5,9 +5,9 @@ import {
   FETCH_MESSAGES_START,
   FETCH_MESSAGES_SUCCESS,
   FETCH_MESSAGES_FAILURE,
-  FETCH_MESSAGE_START,
-  FETCH_MESSAGE_SUCCESS,
-  FETCH_MESSAGE_FAILURE,
+  NEW_MESSAGE_START,
+  NEW_MESSAGE_SUCCESS,
+  NEW_MESSAGE_FAILURE,
 } from '../Constants';
 
 // represents the messages that comes in from the action and
@@ -24,7 +24,8 @@ const initialState = {
 // look at what type is being passed
 // default for now because the action does not take anything in yet
 // the action payload comes from the message/action
-export const messages = (state = initialState, action) => {
+// export const messages = (state = initialState, action) => {
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_MESSAGES_START:
       return {
@@ -33,7 +34,7 @@ export const messages = (state = initialState, action) => {
       };
 
     case FETCH_MESSAGES_SUCCESS:
-      console.log('reducer');
+      console.log('reducer all messages');
       return {
         ...state,
         messages: action.payload,
@@ -46,8 +47,17 @@ export const messages = (state = initialState, action) => {
         isFetching: false,
       };
 
+    case NEW_MESSAGE_SUCCESS:
+      console.log('reducer ONE msg');
+      return {
+        ...state,
+        // messages: [...state.messages, action.payload],
+        message: action.payload,
+        isFetching: false,
+      };
+
     default:
       return state;
   }
-};
-export default messages;
+}
+// export default messages;
