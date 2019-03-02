@@ -22,7 +22,6 @@ const initialState = {
 // takes in the state and action will incl a type
 // action is an object and will have a type
 // look at what type is being passed
-// default for now because the action does not take anything in yet
 // the action payload comes from the message/action
 // export const messages = (state = initialState, action) => {
 export default function (state = initialState, action) {
@@ -47,6 +46,12 @@ export default function (state = initialState, action) {
         isFetching: false,
       };
 
+    case NEW_MESSAGE_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+
     case NEW_MESSAGE_SUCCESS:
       console.log('reducer ONE msg');
       return {
@@ -56,8 +61,13 @@ export default function (state = initialState, action) {
         isFetching: false,
       };
 
+    case NEW_MESSAGE_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+      };
+
     default:
       return state;
   }
 }
-// export default messages;
