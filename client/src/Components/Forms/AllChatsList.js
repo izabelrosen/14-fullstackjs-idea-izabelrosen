@@ -19,8 +19,8 @@ class AllChatsList extends Component {
   // problem is when creating a new message it saves but only as a new message
   // But after reloading the page it adds to the array with the rest of info
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.message) {
-      this.props.messages.push(nextProps.message);
+    if (nextProps.newMessage) {
+      this.props.messages.push(nextProps.newMessage);
     }
   }
 
@@ -42,11 +42,11 @@ class AllChatsList extends Component {
 AllChatsList.propTypes = {
   fetchMessages: PropTypes.func.isRequired,
   messages: PropTypes.array.isRequired,
-  message: PropTypes.object,
+  newMessage: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   messages: state.messages.messages,
-  message: state.messages.message,
+  newMessage: state.messages.message,
 });
 export default connect(mapStateToProps, { fetchMessages })(AllChatsList);
