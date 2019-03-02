@@ -9,36 +9,71 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 export class SignUpForm extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+    };
+    this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const newUser = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+    };
+    console.log(newUser);
+  }
+
   render() {
     return (
       <div className="signup">
       <h1>SIGN UP</h1>
         <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <form onSubmit = { this.handleSubmit }>
         <TextField
-          hintText="Email"
-          floatingLabelText="Enter your email"
-        />
-        <br />
-        {/* <TextField
-          hintText="Name"
-          floatingLabelText="Name"
-        /> */}
-        <TextField
-          hintText="Username"
-          floatingLabelText="Username"
+        name="username"
+        onChange = { this.onChange }
+        value = { this.state.username }
+        floatingLabelText="Username"
         />
         <br />
         <TextField
-          hintText="Password Field"
-          floatingLabelText="Password"
-          type="password"
+        name="email"
+        onChange = { this.onChange }
+        value = { this.state.email }
+        intText="Email"
+        floatingLabelText="Enter your email"
+        />
+        <br />
+        <TextField
+        name="password"
+        onChange = { this.onChange }
+        value = { this.state.password }
+        floatingLabelText="Password"
+        type="password"
         />
         <br />
         <br />
-        <Button variant="outlined" color="secondary">
-          SIGN UP
-        </Button>
-
+        <Button
+        type="submit"
+        onSubmit = { this.onSubmit }
+        variant="outlined"
+        className="register__button"
+        label="Send"
+        >REGISTER</Button>
+        </form>
         </MuiThemeProvider>
       </div>
     );
