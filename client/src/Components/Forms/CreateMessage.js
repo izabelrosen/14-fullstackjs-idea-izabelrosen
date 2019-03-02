@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+// import { withRouter } from 'react-router-dom';
 import '../App';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
+import { newMessage } from '../../Actions/message';
+/* eslint-disable */
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["createMessage"] }] */
-export class CreateMessage extends Component {
+class CreateMessage extends Component {
   constructor(props) {
     super(props);
 
@@ -14,41 +17,55 @@ export class CreateMessage extends Component {
     };
     // this.createMessage = this.createMessage.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  // UNSAFE_componentWillMount() {
+  //   this.props.createMessage();
+  //   // this.setState({ message: { ...this.props.message } });
+  // }
+
+  // UNSAFE_componentDidMount() {
+  //   this.setState({ message: { ...this.props.message } });
+  //   this.props.newMessage({ text: 'HALLÅ?'})
+  // }
+
+  // componentWillReceiveProps(nextProps, prevState) {
+  //   console.log(nextProps);
+  //     this.setState({ message: nextProps.message });
+  // }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state);
+    console.log(this.props);
   }
 
-  onSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
-    console.log('Send button triggered');
+    // console.log('Send button triggered');
 
     const message = {
       text: this.state.text,
     };
-    fetch('http://localhost:3003/messages', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(message),
-    })
-      .then(res => res.json())
-      .then(data => console.log(data));
-  }
+    // console.log(this);
+    // // this.props.dispatch(newMessage(message));
+    // console.log(this.props);
+    // this.props.addMessage(message);
+    // this.props.dispatch(newMessage(message));
+    //   this.setState({
+    //     text: ""
+    //   });
+    this.props.newMessage(message);
 
-  createMessage() {
+
   }
 
   render() {
-    // const messages = [];
-
     return (
       <div className="createMessage__form">
         <h1>Write a message</h1>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.handleSubmit}>
         <TextField
         id="standard-textarea"
         name="text"
@@ -74,4 +91,21 @@ export class CreateMessage extends Component {
   }
 }
 
-export default withRouter(CreateMessage);
+CreateMessage.propTypes = {
+  newMessage: PropTypes.func.isRequired,
+  message: PropTypes.object.isRequired
+};
+
+// CreateMessage.propTypes = {
+//   createMessage: PropTypes.func.isRequired,
+//   message: PropTypes.object.isRequired
+// };
+
+// const mapDispatchToProps = (dispatch) => ({
+//   addMessage(message) {
+//     dispatch(newMessage(message))
+//   }
+// });
+
+export default connect(null, { newMessage })(CreateMessage);
+
