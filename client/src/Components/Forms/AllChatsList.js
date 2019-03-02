@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../App';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../../Actions/message';
-// import message from '../../Reducers/message';
-// import Avatar from '@material-ui/core/Avatar';
 
-// For some reason the eslint camelcase doesnt allow to use the one beneath, therefore add disable
-// /* eslint camelcase: ["error", {allow: ["UNSAFE_componentWillMount"]}] */
+// This doesnot work by adding to allow's..
+// /* eslint camelcase: ["error", {allow: ["UNSAFE_componentWillMount",
+// "UNSAFE_componentWillReceiveProps"]}] */
 /* eslint-disable */
-
 class AllChatsList extends Component {
   UNSAFE_componentWillMount() {
     // let { dispatch } = this.props;
@@ -18,26 +15,16 @@ class AllChatsList extends Component {
     this.props.fetchMessages();
   }
 
-  // *** STATE FROM HERE BEFORE PROPS ***
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     messages: [],
-  //   };
-  // }
-
-  // componentDidMount() {
-  //   this.setState({
-
-  //   });
-  //   fetch('http://localhost:3003/messages')
-  //     .then(res => res.json())
-  //     .then(data => this.setState({ messages: data }));
-  // }
-  // *** UNTIL HERE ***
+  // ** Auto update: Why doesnt this work? Do I even need it? Socket will handle it?
+  // problem is when creating a new message it saves but only as a new message
+  // But after reloading the page it adds to the array with the rest of info
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.message) {
+      this.props.messages.push(nextProps.message);
+    }
+  }
 
   render() {
-    console.log(this.props);
     const messageItems = this.props.messages.map(message => (
       <div key={message.id}>
         <h3>{message.text}</h3>
@@ -52,14 +39,14 @@ class AllChatsList extends Component {
   }
 }
 // messages from the root reducer, items from message reducer
-// AllChatsList.propTypes = { fetchMessages: PropTypes.func.isRequired };
 AllChatsList.propTypes = {
   fetchMessages: PropTypes.func.isRequired,
-  messages: PropTypes.array.isRequired
+  messages: PropTypes.array.isRequired,
+  message: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   messages: state.messages.messages,
+  message: state.messages.message,
 });
 export default connect(mapStateToProps, { fetchMessages })(AllChatsList);
-

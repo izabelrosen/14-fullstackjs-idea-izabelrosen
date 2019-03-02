@@ -6,7 +6,7 @@ import '../App';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { newMessage } from '../../Actions/message';
-/* eslint-disable */
+
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["createMessage"] }] */
 class CreateMessage extends Component {
   constructor(props) {
@@ -15,50 +15,28 @@ class CreateMessage extends Component {
     this.state = {
       text: '',
     };
-    // this.createMessage = this.createMessage.bind(this);
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // UNSAFE_componentWillMount() {
-  //   this.props.createMessage();
-  //   // this.setState({ message: { ...this.props.message } });
-  // }
-
-  // UNSAFE_componentDidMount() {
-  //   this.setState({ message: { ...this.props.message } });
-  //   this.props.newMessage({ text: 'HALLÅ?'})
-  // }
-
-  // componentWillReceiveProps(nextProps, prevState) {
-  //   console.log(nextProps);
-  //     this.setState({ message: nextProps.message });
-  // }
-
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
-    console.log(this.props);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // console.log('Send button triggered');
 
     const message = {
       text: this.state.text,
     };
-    // console.log(this);
-    // // this.props.dispatch(newMessage(message));
-    // console.log(this.props);
-    // this.props.addMessage(message);
-    // this.props.dispatch(newMessage(message));
-    //   this.setState({
-    //     text: ""
-    //   });
-    this.props.newMessage(message);
 
-
+    // Clear input field after sending msg
+    if (this.state.text) {
+      this.props.newMessage(message);
+      this.setState({
+        text: '',
+      });
+    }
   }
 
   render() {
@@ -82,7 +60,6 @@ class CreateMessage extends Component {
         className="createMessage__send-button"
         label="Send"
         primary={true}
-        // onClick={this.createMessage}
         onSubmit={this.onSubmit}
         >Send</Button>
         </form>
@@ -93,19 +70,7 @@ class CreateMessage extends Component {
 
 CreateMessage.propTypes = {
   newMessage: PropTypes.func.isRequired,
-  message: PropTypes.object.isRequired
+  message: PropTypes.object,
 };
 
-// CreateMessage.propTypes = {
-//   createMessage: PropTypes.func.isRequired,
-//   message: PropTypes.object.isRequired
-// };
-
-// const mapDispatchToProps = (dispatch) => ({
-//   addMessage(message) {
-//     dispatch(newMessage(message))
-//   }
-// });
-
 export default connect(null, { newMessage })(CreateMessage);
-
