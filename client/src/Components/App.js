@@ -6,6 +6,8 @@ import {
   Switch,
   // Redirect
 } from 'react-router-dom';
+// import { Provider } from 'react-redux';
+// import store from '../Store';
 // import { cyan500 } from 'material-ui/styles/colors';
 // import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -17,20 +19,12 @@ import SignUp from '../Views/Site/SignUp';
 import AllChats from '../Views/Site/AllChats';
 import MyChat from '../Views/Site/MyChat';
 
-
-// const muiTheme = getMuiTheme({
-//   palette: {
-//     textColor: cyan500,
-//   },
-//   appBar: {
-//     height: 50,
-//   },
-// });
-
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
+
 class App extends Component {
   render() {
     return (
+      // <Provider store = { store }>
       <Router>
         <div className="App">
         <Header />
@@ -52,6 +46,7 @@ class App extends Component {
           </div>
         </div>
       </Router>
+    // </Provider>
     );
   }
 }

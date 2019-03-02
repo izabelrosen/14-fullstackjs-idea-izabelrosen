@@ -1,33 +1,52 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../App';
-import { withRouter } from 'react-router-dom';
-// import TextField from 'material-ui/TextField';
-// import RaisedButton from 'material-ui/RaisedButton';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import { connect } from 'react-redux';
+import { fetchMessages } from '../../Actions/message';
 
-// import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-// import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-// import Grid from '@material-ui/core/Grid';
-// import Typography from '@material-ui/core/Typography';
+// This doesnot work by adding to allow's..
+// /* eslint camelcase: ["error", {allow: ["UNSAFE_componentWillMount",
+// "UNSAFE_componentWillReceiveProps"]}] */
+/* eslint-disable */
+class AllChatsList extends Component {
+  UNSAFE_componentWillMount() {
+    // let { dispatch } = this.props;
+    // dispatch(fetchMessages());
+    this.props.fetchMessages();
+  }
 
-/*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
-export class AllChatsList extends Component {
+  // ** Auto update: Why doesnt this work? Do I even need it? Socket will handle it?
+  // problem is when creating a new message it saves but only as a new message
+  // But after reloading the page it adds to the array with the rest of info
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.newMessage) {
+      this.props.messages.push(nextProps.newMessage);
+    }
+  }
+
   render() {
+    const messageItems = this.props.messages.map(message => (
+      <div key={message.id}>
+        <h3>{message.text}</h3>
+      </div>
+    ));
     return (
-      <div className="allchatslist">
-      <h1>ALL MY CHATS</h1>
-
-      <Avatar>OP</Avatar>
-      <p>Chat message goes here, next to avatar. </p>
-
-    </div>
+      <div>
+      <h3>här är alla meddelanden</h3>
+      {messageItems}
+      </div>
     );
   }
 }
+// messages from the root reducer, items from message reducer
+AllChatsList.propTypes = {
+  fetchMessages: PropTypes.func.isRequired,
+  messages: PropTypes.array.isRequired,
+  newMessage: PropTypes.object,
+};
 
-export default withRouter(AllChatsList);
+const mapStateToProps = state => ({
+  messages: state.messages.messages,
+  newMessage: state.messages.message,
+});
+export default connect(mapStateToProps, { fetchMessages })(AllChatsList);
