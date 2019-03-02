@@ -2,9 +2,9 @@ import {
   FETCH_MESSAGES_START,
   FETCH_MESSAGES_SUCCESS,
   FETCH_MESSAGES_FAILURE,
-  // NEW_MESSAGE_START,
+  NEW_MESSAGE_START,
   NEW_MESSAGE_SUCCESS,
-  // NEW_MESSAGE_FAILURE,
+  NEW_MESSAGE_FAILURE,
 } from '../Constants';
 
 // each action creator is a function that needs to export
@@ -30,7 +30,7 @@ export const rejectedMessages = () => ({
 });
 
 export const requestMessage = () => ({
-  type: FETCH_MESSAGE_START,
+  type: NEW_MESSAGE_START,
 });
 
 export const receiveMessage = message => ({
@@ -39,7 +39,7 @@ export const receiveMessage = message => ({
 });
 
 export const rejectedMessage = () => ({
-  type: FETCH_MESSAGE_FAILURE,
+  type: NEW_MESSAGE_FAILURE,
 });
 
 export const fetchMessages = () => (dispatch) => {
@@ -50,28 +50,9 @@ export const fetchMessages = () => (dispatch) => {
   // .catch(error => dispatch(rejectedMessages()));
 };
 
-// export const createMessage = (message) => (dispatch) => {
-//   console.log('hallå from action?');
-//   const requestOptions = {
-//     method: "POST",
-//     // headers: authHelper(),
-//     body: JSON.stringify(message)
-//   };
-//   dispatch(requestMessage());
-
-//   return fetch('http://localhost:3003/messages', requestOptions)
-//     .then(res => res.json())
-//     .then(message => {
-//       dispatch(receiveMessage(message));
-//     })
-//     .catch(error => {
-//       dispatch(rejectedMessage());
-//     });
-//   };
-
 export const newMessage = (message) => (dispatch) => {
   console.log('fetching one message??');
-  fetch('http://localhost:3003/messages', {
+  fetch(url, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -84,28 +65,3 @@ export const newMessage = (message) => (dispatch) => {
     payload: message,
   }));
 };
-
-
-// export const fetchMessages = () => (dispatch) => {
-//   console.log('fetching messages?');
-//   dispatch(requestMessages());
-
-//   return fetch(url)
-//     .then(res => res.json())
-//     .then(messages => {
-//       dispatch(receiveMessages(messages));
-//     })
-//     .catch(error => {
-//       dispatch(rejectedMessages());
-//     });
-// };
-
-// export const fetchMessages = () => (dispatch) => {
-//   console.log('fetching messages?');
-//   fetch('http://localhost:3003/messages')
-//     .then(res => res.json())
-//     .then(messages => dispatch({
-//       type: FETCH_MESSAGES_SUCCESS,
-//       payload: messages,
-//     }));
-// };
