@@ -7,28 +7,65 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import { withRouter } from 'react-router-dom';
 
-/*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 export class SignInForm extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+    this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    console.log(user);
+  }
+
   render() {
     return (
       <div className="signin">
       <h1>SIGN IN</h1>
         <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <form onSubmit = { this.handleSubmit }>
         <TextField
-          hintText="Email"
-          floatingLabelText="Enter your email"
+        name="email"
+        type="email"
+        onChange = { this.onChange }
+        value = { this.state.email }
+        floatingLabelText="Email"
         />
         <br />
         <TextField
-          hintText="Password"
-          floatingLabelText="Password"
-          type="password"
+        name="password"
+        type="password"
+        onChange = { this.onChange}
+        value = { this.state.password }
+        floatingLabelText="Password"
         />
         <br />
         <br />
-        <Button variant="outlined" color="primary">
-          SIGN IN
+        <Button
+        type="submit"
+        onSubmit = { this.onSubmit }
+        variant="outlined"
+        color="primary"
+        className="signin__button"
+        label="Send"
+        >SIGN IN
         </Button>
+        </form>
         </MuiThemeProvider>
       </div>
     );

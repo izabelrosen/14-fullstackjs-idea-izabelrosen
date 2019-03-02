@@ -43,6 +43,7 @@ export class SignUpForm extends Component {
         <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <form onSubmit = { this.handleSubmit }>
         <TextField
+        type="text"
         name="username"
         onChange = { this.onChange }
         value = { this.state.username }
@@ -50,19 +51,19 @@ export class SignUpForm extends Component {
         />
         <br />
         <TextField
+        type="email"
         name="email"
         onChange = { this.onChange }
         value = { this.state.email }
-        intText="Email"
-        floatingLabelText="Enter your email"
+        floatingLabelText="Email"
         />
         <br />
         <TextField
+        type="password"
         name="password"
         onChange = { this.onChange }
         value = { this.state.password }
         floatingLabelText="Password"
-        type="password"
         />
         <br />
         <br />
