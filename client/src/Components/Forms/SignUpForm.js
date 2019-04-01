@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import '../App';
 import { withRouter } from 'react-router-dom';
+import {
+  Button, Divider, Form, Label,
+} from 'semantic-ui-react';
 import TextField from 'material-ui/TextField';
-import Button from '@material-ui/core/Button';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -40,7 +42,39 @@ export class SignUpForm extends Component {
     return (
       <div className="signup">
       <h1>SIGN UP</h1>
-        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+      <Form>
+        <Form.Field inline>
+        <input type='text' placeholder='Username' />
+        {/* <Label basic color='red' pointing='left'>
+          That name is taken!
+        </Label> */}
+        </Form.Field>
+        <Form.Field inline>
+        <input type='email' placeholder='Email' />
+        {/* <Label basic color='red' pointing='left'>
+          That name is taken!
+        </Label> */}
+        </Form.Field>
+        <Form.Field inline>
+        <input type='password' placeholder='Password' />
+        {/* <Label basic color='red' pointing='left'>
+          That name is taken!
+        </Label> */}
+        </Form.Field>
+      <br />
+      <br />
+      <Button
+        type="submit"
+        onSubmit = { this.onSubmit }
+        variant="outlined"
+        className="register__button"
+        // label="Send"
+        basic color='red'>
+          REGISTER
+        </Button>
+    </Form>
+    <Divider />
+        {/* <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <form onSubmit = { this.handleSubmit }>
         <TextField
         type="text"
@@ -72,10 +106,12 @@ export class SignUpForm extends Component {
         onSubmit = { this.onSubmit }
         variant="outlined"
         className="register__button"
-        label="Send"
-        >REGISTER</Button>
+        // label="Send"
+        basic color='red'>
+          REGISTER
+        </Button>
         </form>
-        </MuiThemeProvider>
+        </MuiThemeProvider> */}
       </div>
     );
   }
