@@ -2,6 +2,12 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  TOKEN_START,
+  TOKEN_SUCCESS,
+  TOKEN_FAILURE,
+  LOGOUT_START,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
   REGISTER_USER_START,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
@@ -40,6 +46,36 @@ export const auth = (state = initialState, action) => {
         isAuthenticated: false,
         user: null,
         statusText: 'Something went wrong when trying to sign in...',
+      };
+
+    case TOKEN_START:
+      return {
+
+      };
+
+    case TOKEN_SUCCESS:
+      return {
+
+      };
+
+    case TOKEN_FAILURE:
+      return {
+
+      };
+
+    case LOGOUT_START:
+      return {
+
+      };
+
+    case LOGOUT_SUCCESS:
+      return {
+
+      };
+
+    case LOGOUT_FAILURE:
+      return {
+
       };
 
     case REGISTER_USER_START:
