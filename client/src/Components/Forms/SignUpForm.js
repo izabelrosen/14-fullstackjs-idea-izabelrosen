@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App';
 import { withRouter } from 'react-router-dom';
 import {
-  Button, Divider, Form, Label,
+  Button, Form, Label,
 } from 'semantic-ui-react';
 import TextField from 'material-ui/TextField';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -42,7 +42,7 @@ export class SignUpForm extends Component {
     return (
       <div className="signup">
       <h1>SIGN UP</h1>
-      <Form>
+      <Form onSubmit = { this.handleSubmit }>
         <Form.Field inline>
         <input type='text' placeholder='Username' />
         {/* <Label basic color='red' pointing='left'>
@@ -73,7 +73,6 @@ export class SignUpForm extends Component {
           REGISTER
         </Button>
     </Form>
-    <Divider />
         {/* <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <form onSubmit = { this.handleSubmit }>
         <TextField

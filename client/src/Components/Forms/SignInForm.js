@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import '../App';
 import TextField from 'material-ui/TextField';
-import Button from '@material-ui/core/Button';
+import {
+  Button, Form, Label,
+} from 'semantic-ui-react';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -37,7 +39,32 @@ export class SignInForm extends Component {
     return (
       <div className="signin">
       <h1>SIGN IN</h1>
-        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+      <Form onSubmit = { this.handleSubmit }>
+        <Form.Field inline>
+        <input type='email' placeholder='Email' />
+        {/* <Label basic color='red' pointing='left'>
+          That name is taken!
+        </Label> */}
+        </Form.Field>
+        <Form.Field inline>
+        <input type='password' placeholder='Password' />
+        {/* <Label basic color='red' pointing='left'>
+          That name is taken!
+        </Label> */}
+        </Form.Field>
+        <br />
+        <br />
+        <Button
+        type="submit"
+        onSubmit = { this.onSubmit }
+        variant="outlined"
+        className="signin__button"
+        basic color='red'>
+        SIGN IN
+        </Button>
+      </Form>
+
+        {/* <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <form onSubmit = { this.handleSubmit }>
         <TextField
         name="email"
@@ -60,13 +87,12 @@ export class SignInForm extends Component {
         type="submit"
         onSubmit = { this.onSubmit }
         variant="outlined"
-        color="primary"
-        className="signin__button"
-        label="Send"
-        >SIGN IN
+        className="register__button"
+        basic color='red'>
+          LOG IN
         </Button>
         </form>
-        </MuiThemeProvider>
+        </MuiThemeProvider> */}
       </div>
     );
   }
