@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
 import '../App';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { Form, TextArea, Button } from 'semantic-ui-react';
 import { newMessage } from '../../Actions/message';
 
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["createMessage"] }] */
@@ -43,27 +42,26 @@ class CreateMessage extends Component {
     return (
       <div className="createMessage__form">
         <h1>Write a message</h1>
-        <form onSubmit={this.handleSubmit}>
-        <TextField
-        id="standard-textarea"
-        name="text"
-        onChange = { this.onChange }
-        value = { this.state.text }
-        placeholder="Message"
-        multiline
-        margin="normal"
-        />
+        <Form onSubmit={this.handleSubmit}>
+          <TextArea
+          rows={2}
+          placeholder="Write a message here..."
+          name="text"
+          onChange = { this.onChange }
+          value = { this.state.text }
+          multiline
+          margin="normal"
+          />
 
         <Button
         type="submit"
         variant="outlined"
         className="createMessage__send-button"
-        label="Send"
-        primary={true}
         onSubmit={this.onSubmit}
-        >Send</Button>
-        </form>
-      </div>
+        basic color='red'>
+        Send</Button>
+        </Form>
+        </div>
     );
   }
 }
