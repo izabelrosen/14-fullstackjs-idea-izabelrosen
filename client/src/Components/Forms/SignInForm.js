@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import '../App';
-import TextField from 'material-ui/TextField';
 import {
-  Button, Form, Label,
+  Button, Form,
 } from 'semantic-ui-react';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+
 import { withRouter } from 'react-router-dom';
 
 export class SignInForm extends Component {
@@ -63,36 +60,6 @@ export class SignInForm extends Component {
         SIGN IN
         </Button>
       </Form>
-
-        {/* <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-        <form onSubmit = { this.handleSubmit }>
-        <TextField
-        name="email"
-        type="email"
-        onChange = { this.onChange }
-        value = { this.state.email }
-        floatingLabelText="Email"
-        />
-        <br />
-        <TextField
-        name="password"
-        type="password"
-        onChange = { this.onChange}
-        value = { this.state.password }
-        floatingLabelText="Password"
-        />
-        <br />
-        <br />
-        <Button
-        type="submit"
-        onSubmit = { this.onSubmit }
-        variant="outlined"
-        className="register__button"
-        basic color='red'>
-          LOG IN
-        </Button>
-        </form>
-        </MuiThemeProvider> */}
       </div>
     );
   }

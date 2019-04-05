@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import '../App';
 import { withRouter } from 'react-router-dom';
 import {
-  Button, Form, Label,
+  Button, Form,
 } from 'semantic-ui-react';
-import TextField from 'material-ui/TextField';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 export class SignUpForm extends Component {
@@ -61,56 +57,18 @@ export class SignUpForm extends Component {
           That name is taken!
         </Label> */}
         </Form.Field>
-      <br />
-      <br />
-      <Button
-        type="submit"
-        onSubmit = { this.onSubmit }
-        variant="outlined"
-        className="register__button"
-        // label="Send"
-        basic color='red'>
-          REGISTER
-        </Button>
-    </Form>
-        {/* <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-        <form onSubmit = { this.handleSubmit }>
-        <TextField
-        type="text"
-        name="username"
-        onChange = { this.onChange }
-        value = { this.state.username }
-        floatingLabelText="Username"
-        />
-        <br />
-        <TextField
-        type="email"
-        name="email"
-        onChange = { this.onChange }
-        value = { this.state.email }
-        floatingLabelText="Email"
-        />
-        <br />
-        <TextField
-        type="password"
-        name="password"
-        onChange = { this.onChange }
-        value = { this.state.password }
-        floatingLabelText="Password"
-        />
         <br />
         <br />
         <Button
-        type="submit"
-        onSubmit = { this.onSubmit }
-        variant="outlined"
-        className="register__button"
-        // label="Send"
-        basic color='red'>
-          REGISTER
+          type="submit"
+          onSubmit = { this.onSubmit }
+          variant="outlined"
+          className="register__button"
+          // label="Send"
+          basic color='red'>
+            REGISTER
         </Button>
-        </form>
-        </MuiThemeProvider> */}
+      </Form>
       </div>
     );
   }
