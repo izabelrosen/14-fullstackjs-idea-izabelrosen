@@ -12,7 +12,7 @@ import {
 // import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Header from './Header';
+// import Header from './Header';
 import Home from '../Views/Site/Home';
 import SignIn from '../Views/Site/SignIn';
 import SignUp from '../Views/Site/SignUp';
@@ -27,7 +27,7 @@ class App extends Component {
       // <Provider store = { store }>
       <Router>
         <div className="App">
-        <Header />
+        {/* <Header /> */}
           <div className="container">
           <ul>
              <li><Link to="/">Hello Home</Link></li>
