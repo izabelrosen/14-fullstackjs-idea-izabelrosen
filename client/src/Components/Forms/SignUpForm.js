@@ -41,51 +41,44 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <div className="signup">
+      <div className='signup'>
       <h1>SIGN UP</h1>
       <Form onSubmit = { this.handleSubmit }>
         <Form.Field inline>
-        <input type='text'
-        placeholder='Username'
-        name="username"
-        onChange = { this.onChange}
-        value = { this.state.username}
-        />
-        {/* <Label basic color='red' pointing='left'>
-          That name is taken!
-        </Label> */}
+          <input
+            type='text'
+            placeholder='Username'
+            name='username'
+            onChange = { this.onChange}
+            value = { this.state.username}
+          />
         </Form.Field>
         <Form.Field inline>
-        <input type='email'
-        name = 'email'
-        placeholder='Email'
-        onChange = { this.onChange}
-        value = { this.state.email}
-        />
-        {/* <Label basic color='red' pointing='left'>
-          That name is taken!
-        </Label> */}
+          <input
+            type = 'email'
+            name = 'email'
+            placeholder = 'Email'
+            onChange = { this.onChange}
+            value = { this.state.email}
+          />
         </Form.Field>
         <Form.Field inline>
-        <input type='password'
-        name = 'password'
-        placeholder='Password'
-        onChange = { this.onChange}
-        value = { this.state.password}
-        />
-        {/* <Label basic color='red' pointing='left'>
-          That name is taken!
-        </Label> */}
+          <input
+            type = 'password'
+            name = 'password'
+            placeholder = 'Password'
+            onChange = { this.onChange}
+            value = { this.state.password}
+          />
         </Form.Field>
         <br />
         <br />
         <Button
-          type="submit"
+          type = 'submit'
           onSubmit = { this.onSubmit }
-          variant="outlined"
-          className="register__button"
-          // label="Send"
-          basic color='red'>
+          variant = 'outlined'
+          className = 'register__button'
+          basic color = 'red'>
             REGISTER
         </Button>
       </Form>
