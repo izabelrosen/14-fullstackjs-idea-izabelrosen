@@ -15,12 +15,23 @@ import {
 
 /* eslint-disable */
 
-const url = `${process.env.REACT_APP_API_BASE_URL}/messages`;
+const url = `${process.env.REACT_APP_API_BASE_URL}/users`;
 
-export const registerUser = (user) => ({
+export const registerUser = user => (dispatch) => {
+  console.log('fetching one user???');
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  })
+  .then(res => res.json())
+  .then(user => dispatch({
     type: REGISTER_USER_SUCCESS,
-    payload: user
-});
+    payload: user,
+  }));
+};
 
 export const loginSuccess = () => ({
   type: LOGIN_SUCCESS,
