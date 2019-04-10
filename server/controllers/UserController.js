@@ -7,6 +7,9 @@ const User = require('../models/User');
 router.post('/', function(req, res) {
     const newUser = new User();
     newUser.name = req.body.name;
+    newUser.username = req.body.username;
+    newUser.email = req.body.email;
+    newUser.password = req.body.password;
 
     newUser.save(function(error) {
         if (error) {
@@ -16,6 +19,7 @@ router.post('/', function(req, res) {
         }
 
         res.status(200).send({
+            user: newUser,
             message: 'User successfully created'
         });
     })
