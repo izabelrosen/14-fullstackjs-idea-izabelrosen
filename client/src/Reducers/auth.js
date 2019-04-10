@@ -90,7 +90,7 @@ export const auth = (state = initialState, action) => {
         ...state,
         isFetching: false,
         isAuthenticated: true,
-        user: action.user,
+        user: action.payload,
         statusText: 'Successfully registered!',
       };
 
