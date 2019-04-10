@@ -17,6 +17,11 @@ import {
 
 const url = `${process.env.REACT_APP_API_BASE_URL}/messages`;
 
+export const registerUser = (user) => ({
+    type: REGISTER_USER_SUCCESS,
+    payload: user
+});
+
 export const loginSuccess = () => ({
   type: LOGIN_SUCCESS,
   // payload: user.user,
