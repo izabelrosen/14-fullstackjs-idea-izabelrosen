@@ -10,8 +10,8 @@ import { registerUser } from '../../Actions/auth';
 
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 class SignUpForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       username: '',
@@ -29,20 +29,31 @@ class SignUpForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const newUser = {
+    const user = {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,
     };
-    console.log(newUser);
-    this.props.registerUser(newUser);
+
+    if (user) {
+      this.props.registerUser(user);
+      this.setState({
+        username: '',
+        email: '',
+        password: '',
+      });
+    }
+    console.log(user);
   }
 
 
   render() {
+    // const { user } = this.props.auth;
+
     return (
       <div className='signup'>
       <h1>SIGN UP</h1>
+      {/* <h3>{user ? user.username : null}</h3> */}
       <Form onSubmit = { this.handleSubmit }>
         <Form.Field inline>
           <input
@@ -87,9 +98,17 @@ class SignUpForm extends Component {
   }
 }
 
-// SignUpForm.propTypes = {
+SignUpForm.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
 
-// }
+// Adds the auth state inside a property
+// state.auth comes from root reducer
+// use it: this.props.auth
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
 
-export default connect(null, { registerUser })(SignUpForm);
-// export default withRouter(SignUpForm);
+// Object with register user so its possible to map
+export default connect(mapStateToProps, { registerUser })(SignUpForm);
