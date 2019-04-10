@@ -1,5 +1,5 @@
 import React from 'react';
-import { SignUpForm } from '../../Components/Forms/SignUpForm';
+import SignUpForm from '../../Components/Forms/SignUpForm';
 
 /*  eslint arrow-body-style: ["error", "always"]  */
 

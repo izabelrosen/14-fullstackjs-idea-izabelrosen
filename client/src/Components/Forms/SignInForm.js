@@ -6,7 +6,7 @@ import {
 
 import { withRouter } from 'react-router-dom';
 
-export class SignInForm extends Component {
+class SignInForm extends Component {
   constructor() {
     super();
 

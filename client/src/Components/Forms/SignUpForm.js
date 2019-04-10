@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import '../App';
 import { withRouter } from 'react-router-dom';
 import {
-  Button, Form,
+  Button, Form, TextArea,
 } from 'semantic-ui-react';
+import { registerUser } from '../../Actions/auth';
 
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
-export class SignUpForm extends Component {
+class SignUpForm extends Component {
   constructor() {
     super();
 
@@ -32,7 +35,9 @@ export class SignUpForm extends Component {
       password: this.state.password,
     };
     console.log(newUser);
+    this.props.registerUser(newUser);
   }
+
 
   render() {
     return (
@@ -40,19 +45,34 @@ export class SignUpForm extends Component {
       <h1>SIGN UP</h1>
       <Form onSubmit = { this.handleSubmit }>
         <Form.Field inline>
-        <input type='text' placeholder='Username' />
+        <input type='text'
+        placeholder='Username'
+        name="username"
+        onChange = { this.onChange}
+        value = { this.state.username}
+        />
         {/* <Label basic color='red' pointing='left'>
           That name is taken!
         </Label> */}
         </Form.Field>
         <Form.Field inline>
-        <input type='email' placeholder='Email' />
+        <input type='email'
+        name = 'email'
+        placeholder='Email'
+        onChange = { this.onChange}
+        value = { this.state.email}
+        />
         {/* <Label basic color='red' pointing='left'>
           That name is taken!
         </Label> */}
         </Form.Field>
         <Form.Field inline>
-        <input type='password' placeholder='Password' />
+        <input type='password'
+        name = 'password'
+        placeholder='Password'
+        onChange = { this.onChange}
+        value = { this.state.password}
+        />
         {/* <Label basic color='red' pointing='left'>
           That name is taken!
         </Label> */}
@@ -74,4 +94,9 @@ export class SignUpForm extends Component {
   }
 }
 
-export default withRouter(SignUpForm);
+// SignUpForm.propTypes = {
+
+// }
+
+export default connect(null, { registerUser })(SignUpForm);
+// export default withRouter(SignUpForm);
