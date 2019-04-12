@@ -30,6 +30,10 @@ export const registerUser = user => (dispatch) => {
   .then(user => dispatch({
     type: REGISTER_USER_SUCCESS,
     payload: user,
+  }))
+  .catch(err => dispatch({
+    type: REGISTER_USER_FAILURE,
+    payload: err.response.data
   }));
 };
 
