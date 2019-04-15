@@ -85,3 +85,8 @@ export const tokenSuccess = () => ({
     type: TOKEN_SUCCESS,
     payload: user,
 });
+
+export const loginFailure = (message) => ({
+  type: LOGIN_FAILURE,
+  message
+});
