@@ -39,8 +39,17 @@ export const registerUser = (user, history) => (dispatch) => {
   }));
 };
 
-export const loginSuccess = () => ({
+export const requestLogin = (cred) => {
+  return {
+    type: LOGIN_START,
+    cred
+  };
+};
+
+export const loginSuccess = (user) => ({
   type: LOGIN_SUCCESS,
+  token: user.token,
+  user: user.user
   // payload: user.user,
   // token: user.token
 })
