@@ -36,7 +36,7 @@ class SignUpForm extends Component {
     };
 
     if (user) {
-      this.props.registerUser(user);
+      this.props.registerUser(user, this.props.history);
       this.setState({
         username: '',
         email: '',
@@ -111,4 +111,4 @@ const mapStateToProps = state => ({
 });
 
 // Object with register user so its possible to map
-export default connect(mapStateToProps, { registerUser })(SignUpForm);
+export default connect(mapStateToProps, { registerUser })(withRouter(SignUpForm));

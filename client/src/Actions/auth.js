@@ -17,7 +17,7 @@ import {
 
 const url = `${process.env.REACT_APP_API_BASE_URL}/users`;
 
-export const registerUser = user => (dispatch) => {
+export const registerUser = (user, history) => (dispatch) => {
   console.log('fetching one user???');
   fetch(url, {
     method: 'POST',
@@ -30,7 +30,9 @@ export const registerUser = user => (dispatch) => {
   .then(user => dispatch({
     type: REGISTER_USER_SUCCESS,
     payload: user,
-  }))
+  }),
+  history.push('/signin')
+  )
   .catch(err => dispatch({
     type: REGISTER_USER_FAILURE,
     payload: err.response.data

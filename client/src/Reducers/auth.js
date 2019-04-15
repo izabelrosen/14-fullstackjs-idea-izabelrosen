@@ -20,7 +20,6 @@ const initialState = {
   statusText: null,
 };
 
-// export default function (state = initialState, action) {
 export const auth = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_START:
