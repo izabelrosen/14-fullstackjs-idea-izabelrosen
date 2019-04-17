@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import '../App';
 import {
   Button, Form,
 } from 'semantic-ui-react';
 
 import { withRouter } from 'react-router-dom';
+import { loginUser } from '../../Actions/auth';
 
 class SignInForm extends Component {
   constructor() {
@@ -29,6 +32,14 @@ class SignInForm extends Component {
       email: this.state.email,
       password: this.state.password,
     };
+
+    if (user) {
+      this.props.loginUser(user);
+      this.setState({
+        email: '',
+        password: '',
+      });
+    }
     console.log(user);
   }
 
@@ -72,3 +83,4 @@ class SignInForm extends Component {
 }
 
 export default withRouter(SignInForm);
+// export default connect({ loginUser })(withRouter(SignInForm));
