@@ -10,8 +10,8 @@ import { withRouter } from 'react-router-dom';
 import { loginUser } from '../../Actions/auth';
 
 class SignInForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       email: '',
@@ -34,7 +34,7 @@ class SignInForm extends Component {
     };
 
     if (user) {
-      this.props.loginUser(user);
+      this.props.loginUser(user, this.props.history);
       this.setState({
         email: '',
         password: '',
@@ -82,5 +82,15 @@ class SignInForm extends Component {
   }
 }
 
-export default withRouter(SignInForm);
+SignInForm.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { loginUser })(withRouter(SignInForm));
+
+// export default withRouter(SignInForm);
 // export default connect({ loginUser })(withRouter(SignInForm));
