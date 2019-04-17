@@ -15,11 +15,11 @@ import {
 
 /* eslint-disable */
 
-const url = `${process.env.REACT_APP_API_BASE_URL}/users`;
+const url = `${process.env.REACT_APP_API_BASE_URL}/auth`;
 
 export const registerUser = (user, history) => (dispatch) => {
   console.log('fetching one user???');
-  fetch(url, {
+  fetch(`${url}/register`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -47,8 +47,7 @@ export const requestLogin = (cred) => {
 };
 
 export const loginUser = (user, history) => (dispatch) => {
-  console.log('LOGIN USER');
-  fetch(url, {
+  fetch(`${url}/login`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -56,18 +55,28 @@ export const loginUser = (user, history) => (dispatch) => {
     body: JSON.stringify(user),
   })
   .then(res => res.json())
-  .then(user => dispatch({
-    type: LOGIN_SUCCESS,
-    payload: user,
-  }),
-  history.push('/allchats')
-  )
+  .then(res => {
+    console.log(res);
+    if (!res.authenticated) {
+      dispatch(loginFailure(res.message || 'Oups! Something went wrong...'));
+      return Promise.reject(res);
+    }
+    localStorage.setItem('user', JSON.stringify(res.user));
+    localStorage.setItem('token', res.token);
+    dispatch(loginSuccess(res));
+    history.push('/allchats')
+  })
   .catch(err => console.log('Error: ', err));
 }
 
 export const tokenSuccess = () => ({
     type: TOKEN_SUCCESS,
     payload: user,
+});
+
+export const loginSuccess = (user) => ({
+  type: LOGIN_SUCCESS,
+  payload: user
 });
 
 export const loginFailure = (message) => ({
