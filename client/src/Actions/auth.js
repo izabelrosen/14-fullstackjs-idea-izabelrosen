@@ -46,40 +46,24 @@ export const requestLogin = (cred) => {
   };
 };
 
-export const loginUser = (user) => (dispatch) => {
-  const user = {
-    email: `${user.email[0]}`,
-    password: `${user.password[0]}`
-  };
-
-  dispatch(requestLogin(user));
-  return fetch(`${url}/login`, {
+export const loginUser = (user, history) => (dispatch) => {
+  console.log('LOGIN USER');
+  fetch(url, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(user),
   })
   .then(res => res.json())
-  .then(res => {
-    if (!res.authenticated) {
-      dispatch(loginFailure(res.message || 'Oups! Something went wrong...'));
-      return Promise.reject(res);
-    }
-    localStorage.setItem('user', JSON.stringify(res.user));
-    localStorage.setItem('token', res.token);
-    dispatch(loginSuccess(res));
-  })
+  .then(user => dispatch({
+    type: LOGIN_SUCCESS,
+    payload: user,
+  }),
+  history.push('/allchats')
+  )
   .catch(err => console.log('Error: ', err));
 }
-
-export const loginSuccess = (user) => ({
-  type: LOGIN_SUCCESS,
-  token: user.token,
-  user: user.user
-  // payload: user.user,
-  // token: user.token
-})
 
 export const tokenSuccess = () => ({
     type: TOKEN_SUCCESS,
