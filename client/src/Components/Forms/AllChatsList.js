@@ -9,7 +9,7 @@ import { fetchMessages } from '../../Actions/message';
 // "UNSAFE_componentWillReceiveProps"]}] */
 /* eslint-disable */
 class AllChatsList extends Component {
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillMount = () => {
     // let { dispatch } = this.props;
     // dispatch(fetchMessages());
     this.props.fetchMessages();
@@ -18,7 +18,7 @@ class AllChatsList extends Component {
   // ** Auto update: Why doesnt this work? Do I even need it? Socket will handle it?
   // problem is when creating a new message it saves but only as a new message
   // But after reloading the page it adds to the array with the rest of info
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
     if (nextProps.newMessage) {
       this.props.messages.push(nextProps.newMessage);
     }
