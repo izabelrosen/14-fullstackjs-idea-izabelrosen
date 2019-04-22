@@ -15,6 +15,7 @@ import {
 
 const initialState = {
   user: {},
+  token: {},
   isFetching: false,
   isAuthenticated: false,
   statusText: null,
@@ -64,17 +65,29 @@ export const auth = (state = initialState, action) => {
 
     case LOGOUT_START:
       return {
-
+        ...state,
+        isFetching: true,
+        isAuthenticated: false,
       };
 
     case LOGOUT_SUCCESS:
       return {
-
+        ...state,
+        user: null,
+        token: null,
+        isFetching: false,
+        isAuthenticated: false,
+        statusText: 'Successfully logged out!',
       };
 
     case LOGOUT_FAILURE:
       return {
-
+        ...state,
+        user: null,
+        token: null,
+        isFetching: false,
+        isAuthenticated: false,
+        statusText: `Error: ${action.message}`,
       };
 
     case REGISTER_USER_START:
