@@ -83,3 +83,22 @@ export const loginFailure = (message) => ({
   type: LOGIN_FAILURE,
   message
 });
+
+export const requestLogout = () => ({
+  type: LOGOUT_START,
+});
+
+export const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
+});
+
+export const logoutFailure = () => ({
+  type: LOGOUT_FAILURE,
+});
+
+export const logoutUser = () => (dispatch) => {
+  dispatch(requestLogout());
+  localStorage.removeItem('user');
+  localStorage.removeItem('token');
+  dispatch(logoutSuccess());
+};
