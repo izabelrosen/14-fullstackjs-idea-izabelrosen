@@ -1,32 +1,32 @@
-// import React, { Component } from 'react';
-// // import {cyan500} from 'material-ui/styles/colors';
-// import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import AppBar from 'material-ui/AppBar';
+import React, { Component } from 'react';
+import connect from 'react-redux';
+import { Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
-// // This replaces the textColor value on the palette
-// // and then update the keys for each component that depends on it.
-// // More on Colors: http://www.material-ui.com/#/customization/colors
-// // const muiTheme = getMuiTheme({
-// //   palette: {
-// //     textColor: cyan500,
-// //   },
-// //   appBar: {
-// //     height: 50,
-// //   },
-// // });
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeItem: '',
+    };
+  }
 
-// // MuiThemeProvider takes the theme as a property and passed it down the hierarchy.
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
-// /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
+  render() {
+    const { activeItem } = this.state;
+    return (
+      <Menu>
+        <Menu.Item
+          name='editorials'
+          active={activeItem === 'editorials'}
+          onClick={this.handleItemClick}
+        >
+          Editorials
+        </Menu.Item>
+        </Menu>
 
-// export default class Header extends Component {
-//   render() {
-//     return (
-//       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-//       <AppBar title="Prattle" />
-//     </MuiThemeProvider>
-//     );
-//   }
-// }
+    );
+  }
+}
+export default Header;
