@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import connect from 'react-redux';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { logoutUser } from '../../Actions/auth';
 
 class Header extends Component {
   constructor(props) {
@@ -9,9 +11,14 @@ class Header extends Component {
     this.state = {
       activeItem: '',
     };
+    this.handleLogOut = this.handleLogOut.bind(this);
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  handleLogOut() {
+    this.props.logoutUser();
+  }
 
   render() {
     const { activeItem } = this.state;
@@ -49,10 +56,10 @@ class Header extends Component {
 
         <Menu.Item
           as={ Link }
-          to='/signup'
+          to='/signin'
           name='logout'
           active={activeItem === 'logout'}
-          onClick={this.handleItemClick}
+          onClick={this.handleLogOut}
         >
           Log out
         </Menu.Item>
@@ -71,4 +78,13 @@ class Header extends Component {
     );
   }
 }
-export default Header;
+
+Header.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps, { logoutUser })(withRouter(Header));
+// export default Header;
