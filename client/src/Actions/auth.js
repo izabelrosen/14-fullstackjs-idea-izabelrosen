@@ -18,7 +18,6 @@ import {
 const url = `${process.env.REACT_APP_API_BASE_URL}/auth`;
 
 export const registerUser = (user, history) => (dispatch) => {
-  console.log('fetching one user???');
   fetch(`${url}/register`, {
     method: 'POST',
     headers: {
@@ -56,7 +55,6 @@ export const loginUser = (user, history) => (dispatch) => {
   })
   .then(res => res.json())
   .then(res => {
-    console.log(res);
     if (!res.authenticated) {
       dispatch(loginFailure(res.message || 'Oups! Something went wrong...'));
       return Promise.reject(res);
