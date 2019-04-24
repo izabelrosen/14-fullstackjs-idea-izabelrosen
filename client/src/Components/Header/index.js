@@ -1,9 +1,12 @@
+/* eslint-disable react/jsx-key */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 import { logoutUser } from '../../Actions/auth';
+
+/* eslint no-useless-computed-key: "error" */
 
 class Header extends Component {
   constructor(props) {
@@ -22,6 +25,7 @@ class Header extends Component {
 
   render() {
     const { activeItem } = this.state;
+    const { isAuthenticated } = this.props;
     return (
       <Menu>
         <Menu.Item
@@ -33,46 +37,49 @@ class Header extends Component {
         >
           Portfolio
         </Menu.Item>
+        {!isAuthenticated
+          ? [
+            <Menu.Item
+              as={Link}
+              to='/signin'
+              name='signin'
+              active={activeItem === 'signin'}
+              onClick={this.handleItemClick}
+            >
+              Sign in
+            </Menu.Item>,
 
-        <Menu.Item
-          as={Link}
-          to='/signin'
-          name='signin'
-          active={activeItem === 'signin'}
-          onClick={this.handleItemClick}
-        >
-          Sign in
-        </Menu.Item>
+            <Menu.Item
+              as={ Link }
+              to='/signup'
+              name='signup'
+              active={activeItem === 'signup'}
+              onClick={this.handleItemClick}
+            >
+              Sign up
+            </Menu.Item>,
+          ]
+          : [
+            <Menu.Item
+              as={ Link }
+              to='/signin'
+              name='logout'
+              active={activeItem === 'logout'}
+              onClick={this.handleLogOut}
+            >
+              Log out
+            </Menu.Item>,
 
-        <Menu.Item
-          as={ Link }
-          to='/signup'
-          name='signup'
-          active={activeItem === 'signup'}
-          onClick={this.handleItemClick}
-        >
-          Sign up
-        </Menu.Item>
-
-        <Menu.Item
-          as={ Link }
-          to='/signin'
-          name='logout'
-          active={activeItem === 'logout'}
-          onClick={this.handleLogOut}
-        >
-          Log out
-        </Menu.Item>
-
-        <Menu.Item
-          as={ Link }
-          to='/allchats'
-          name='allchats'
-          active={activeItem === 'allchats'}
-          onClick={this.handleItemClick}
-        >
-          Chat
-        </Menu.Item>
+            <Menu.Item
+              as={ Link }
+              to='/allchats'
+              name='allchats'
+              active={activeItem === 'allchats'}
+              onClick={this.handleItemClick}
+            >
+              Chat
+            </Menu.Item>,
+          ]}
         </Menu>
 
     );
@@ -85,5 +92,6 @@ Header.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 export default connect(mapStateToProps, { logoutUser })(withRouter(Header));
