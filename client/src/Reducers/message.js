@@ -23,8 +23,8 @@ const initialState = {
 // action is an object and will have a type
 // look at what type is being passed
 // the action payload comes from the message/action
-// export const messages = (state = initialState, action) => {
-export default function (state = initialState, action) {
+export const messages = (state = initialState, action) => {
+// export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_MESSAGES_START:
       return {
@@ -70,4 +70,5 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+export default messages;

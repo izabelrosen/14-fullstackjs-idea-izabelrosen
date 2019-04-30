@@ -1,48 +1,114 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import '../App';
 import { withRouter } from 'react-router-dom';
-import TextField from 'material-ui/TextField';
-import Button from '@material-ui/core/Button';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import {
+  Button, Form, TextArea,
+} from 'semantic-ui-react';
+import { registerUser } from '../../Actions/auth';
 
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
-export class SignUpForm extends Component {
-  render() {
-    return (
-      <div className="signup">
-      <h1>SIGN UP</h1>
-        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-        <TextField
-          hintText="Email"
-          floatingLabelText="Enter your email"
-        />
-        <br />
-        {/* <TextField
-          hintText="Name"
-          floatingLabelText="Name"
-        /> */}
-        <TextField
-          hintText="Username"
-          floatingLabelText="Username"
-        />
-        <br />
-        <TextField
-          hintText="Password Field"
-          floatingLabelText="Password"
-          type="password"
-        />
-        <br />
-        <br />
-        <Button variant="outlined" color="secondary">
-          SIGN UP
-        </Button>
+class SignUpForm extends Component {
+  constructor(props) {
+    super(props);
 
-        </MuiThemeProvider>
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+    };
+    this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const user = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    if (user) {
+      this.props.registerUser(user, this.props.history);
+      this.setState({
+        username: '',
+        email: '',
+        password: '',
+      });
+    }
+    console.log(user);
+  }
+
+
+  render() {
+    // const { user } = this.props.auth;
+
+    return (
+      <div className='signup'>
+      <h1>SIGN UP</h1>
+      {/* <h3>{user ? user.username : null}</h3> */}
+      <Form onSubmit = { this.handleSubmit }>
+        <Form.Field inline>
+          <input
+            type='text'
+            placeholder='Username'
+            name='username'
+            onChange = { this.onChange}
+            value = { this.state.username}
+          />
+        </Form.Field>
+        <Form.Field inline>
+          <input
+            type = 'email'
+            name = 'email'
+            placeholder = 'Email'
+            onChange = { this.onChange}
+            value = { this.state.email}
+          />
+        </Form.Field>
+        <Form.Field inline>
+          <input
+            type = 'password'
+            name = 'password'
+            placeholder = 'Password'
+            onChange = { this.onChange}
+            value = { this.state.password}
+          />
+        </Form.Field>
+        <br />
+        <br />
+        <Button
+          type = 'submit'
+          onSubmit = { this.onSubmit }
+          variant = 'outlined'
+          className = 'register__button'
+          basic color = 'red'>
+            REGISTER
+        </Button>
+      </Form>
       </div>
     );
   }
 }
 
-export default withRouter(SignUpForm);
+SignUpForm.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+// Adds the auth state inside a property
+// state.auth comes from root reducer
+// use it: this.props.auth
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+// Object with register user so its possible to map
+export default connect(mapStateToProps, { registerUser })(withRouter(SignUpForm));

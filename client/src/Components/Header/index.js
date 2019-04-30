@@ -1,32 +1,97 @@
+/* eslint-disable react/jsx-key */
 import React, { Component } from 'react';
-// import {cyan500} from 'material-ui/styles/colors';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import AppBar from 'material-ui/AppBar';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Menu } from 'semantic-ui-react';
+import { Link, withRouter } from 'react-router-dom';
+import { logoutUser } from '../../Actions/auth';
 
-// This replaces the textColor value on the palette
-// and then update the keys for each component that depends on it.
-// More on Colors: http://www.material-ui.com/#/customization/colors
-// const muiTheme = getMuiTheme({
-//   palette: {
-//     textColor: cyan500,
-//   },
-//   appBar: {
-//     height: 50,
-//   },
-// });
+/* eslint no-useless-computed-key: "error" */
 
-// MuiThemeProvider takes the theme as a property and passed it down the hierarchy.
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeItem: '',
+    };
+    this.handleLogOut = this.handleLogOut.bind(this);
+  }
 
-/*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
-export default class Header extends Component {
+  handleLogOut() {
+    this.props.logoutUser();
+  }
+
   render() {
+    const { activeItem } = this.state;
+    const { isAuthenticated } = this.props;
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-      <AppBar title="Prattle" />
-    </MuiThemeProvider>
+      <Menu>
+        <Menu.Item
+          as={ Link }
+          to='/'
+          name='portfolio'
+          active={activeItem === 'portfolio'}
+          onClick={this.handleItemClick}
+        >
+          Portfolio
+        </Menu.Item>
+        {!isAuthenticated
+          ? [
+            <Menu.Item
+              as={Link}
+              to='/signin'
+              name='signin'
+              active={activeItem === 'signin'}
+              onClick={this.handleItemClick}
+            >
+              Sign in
+            </Menu.Item>,
+
+            <Menu.Item
+              as={ Link }
+              to='/signup'
+              name='signup'
+              active={activeItem === 'signup'}
+              onClick={this.handleItemClick}
+            >
+              Sign up
+            </Menu.Item>,
+          ]
+          : [
+            <Menu.Item
+              as={ Link }
+              to='/signin'
+              name='logout'
+              active={activeItem === 'logout'}
+              onClick={this.handleLogOut}
+            >
+              Log out
+            </Menu.Item>,
+
+            <Menu.Item
+              as={ Link }
+              to='/allchats'
+              name='allchats'
+              active={activeItem === 'allchats'}
+              onClick={this.handleItemClick}
+            >
+              Chat
+            </Menu.Item>,
+          ]}
+        </Menu>
+
     );
   }
 }
+
+Header.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
+});
+export default connect(mapStateToProps, { logoutUser })(withRouter(Header));

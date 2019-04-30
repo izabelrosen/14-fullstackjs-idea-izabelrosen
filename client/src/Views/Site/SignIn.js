@@ -1,5 +1,5 @@
 import React from 'react';
-import { SignInForm } from '../../Components/Forms/SignInForm';
+import SignInForm from '../../Components/Forms/SignInForm';
 
 /*  eslint arrow-body-style: ["error", "always"]  */
 
