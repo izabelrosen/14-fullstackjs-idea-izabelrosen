@@ -79,6 +79,17 @@ class Header extends Component {
             >
               Chat
             </Menu.Item>,
+
+            <Menu.Item
+            as={ Link }
+            to='/adminpanel'
+            name='adminpanel'
+            active={activeItem === 'adminpanel'}
+            onClick={this.handleItemClick}
+          >
+            Admin
+          </Menu.Item>,
+
           ]}
         </Menu>
 
