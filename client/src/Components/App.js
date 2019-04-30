@@ -11,13 +11,13 @@ import SignIn from '../Views/Site/SignIn';
 import SignUp from '../Views/Site/SignUp';
 import AllChats from '../Views/Site/AllChats';
 import MyChat from '../Views/Site/MyChat';
+import PrivateRoute from './Auth';
 
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 
 class App extends Component {
   render() {
     return (
-      // <Provider store = { store }>
       <Router>
         <div className="App">
         <Header />
@@ -31,15 +31,14 @@ class App extends Component {
           </ul>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/signin" component={SignIn} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/allchats" component={AllChats} />
-            <Route path="/mychat" component={MyChat} />
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/signup" component={SignUp} />
+            <PrivateRoute exact path="/allchats" component={AllChats} />
+            <Route exact path="/mychat" component={MyChat} />
           </Switch>
           </div>
         </div>
       </Router>
-    // </Provider>
     );
   }
 }
