@@ -1,0 +1,16 @@
+.adminpanel {
+  display: flex;
+
+}
+
+.adminpanel__users {
+  order: 0
+}
+
+.adminpanel__messages {
+  order: 1
+}
+
+h3 {
+  color: pink;
+}
