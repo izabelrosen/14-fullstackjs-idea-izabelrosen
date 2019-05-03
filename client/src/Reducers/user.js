@@ -5,6 +5,7 @@ import {
 } from '../Constants';
 
 const initialState = {
+  users: [],
   user: {},
   isFetching: false,
 };
@@ -21,7 +22,7 @@ export const user = (state = initialState, action) => {
     case FETCH_USER_SUCCESS:
       return {
         ...state,
-        user: action.payload,
+        users: action.payload,
         isFetching: false,
       };
 
