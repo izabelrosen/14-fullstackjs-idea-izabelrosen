@@ -17,6 +17,8 @@ const Root = () => {
   }
   return (
     // Provider is the bridge between react and redux
+    // Provider provides our react app tillgång till redux store -
+    // skickar store som en property till providern
     <Provider store={store}>
       <Router>
         <App />
