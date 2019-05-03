@@ -44,7 +44,12 @@ export const user = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        user: action.payload,
+        // object destructuring
+        // filter out the id that is not deleted
+        // that is not matched with the deleted id
+        users: state.users.filter(({ _id }) => (
+          _id !== action.payload
+        )),
       };
 
     case DELETE_USER_FAILURE:
