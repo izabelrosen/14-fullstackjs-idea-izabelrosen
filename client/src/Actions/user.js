@@ -57,8 +57,6 @@ export const requestDeleteUser = () => ({
 export const deleteUser = (userid) => dispatch => {
   // save userid in a variable because the id got lost on the way
   const _id = userid;
-  console.log(userid);
-  debugger;
   fetch(`${url}/${userid}`, {
     method: 'DELETE',
     headers: {
