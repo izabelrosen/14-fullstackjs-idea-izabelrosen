@@ -50,17 +50,26 @@ export const auth = (state = initialState, action) => {
 
     case TOKEN_START:
       return {
-
+        ...state,
+        isFetching: true,
+        isAuthenticated: false,
       };
 
     case TOKEN_SUCCESS:
       return {
-
+        ...state,
+        isFetching: false,
+        isAuthenticated: true,
+        user: action.payload,
+        statusText: 'Successful authentication,',
       };
 
     case TOKEN_FAILURE:
       return {
-
+        ...state,
+        isFetching: false,
+        isAuthenticated: false,
+        statusText: `Error: ${action.message}`,
       };
 
     case LOGOUT_START:
