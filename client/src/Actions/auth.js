@@ -67,10 +67,41 @@ export const loginUser = (user, history) => (dispatch) => {
   .catch(err => console.log('Error: ', err));
 }
 
-export const tokenSuccess = () => ({
-    type: TOKEN_SUCCESS,
-    payload: user,
+export const requestToken = (token) => ({
+  type: TOKEN_START,
+  payload: token
 });
+
+export const tokenSuccess = ({user}) => ({
+    type: TOKEN_SUCCESS,
+    payload: user
+});
+
+export const tokenFailure = (message) => ({
+  type: TOKEN_FAILURE,
+  message
+});
+
+export const verifyToken = (token) => (dispatch) => {
+  const options = {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token
+    }
+  }
+  dispatch(requestToken(token));
+  return fetch(`${url}/me`, options)
+  .then(res => res.json())
+  .then(res => {
+    if (!res.authenticated && !res.user._id) {
+      dispatch(tokenFailure('Please sign in again.'));
+      return Promise.reject(res);
+    }
+    dispatch(tokenSuccess(res));
+  })
+  .catch(err => console.log('Error: ', err));
+};
 
 export const loginSuccess = (user) => ({
   type: LOGIN_SUCCESS,
