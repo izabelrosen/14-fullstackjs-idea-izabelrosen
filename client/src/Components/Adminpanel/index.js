@@ -1,10 +1,11 @@
 /* eslint-disable react/no-deprecated */
-/* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../App';
 import { connect } from 'react-redux';
-import { List } from 'semantic-ui-react';
+import {
+  Button, Icon, Menu, Table,
+} from 'semantic-ui-react';
 import { fetchUsers } from '../../Actions/user';
 import './style.css';
 
@@ -14,43 +15,55 @@ class AdminPanel extends Component {
   }
 
   render() {
-    const userItems = this.props.users.map(user => (
-      <div key={user.id}>
-        <h4>{user.email}</h4>
-      </div>
-    ));
     return (
       <div className="adminpanel">
-        <h1>admin</h1>
-        <div>
-          <h4>{userItems}</h4>
-        </div>
+        <Table celled>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell>Username</Table.HeaderCell>
+        <Table.HeaderCell>Email</Table.HeaderCell>
+        <Table.HeaderCell>Delete</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
 
-  <List>
-    <List.Item>
-      <List.Content>
-        <List.Header>
-          <h3 className="adminpanel__users">
-            Users
-          </h3></List.Header>
-      </List.Content>
-    </List.Item>
-    <List.Item>
-      <List.Content>
-        <List.Header>
-          <h3 className="adminpanel__messages">
-            Messages
-          </h3></List.Header>
-      </List.Content>
-    </List.Item>
+    <Table.Body>
+      { this.props.users.map(user => (
+        <Table.Row key={user.id}>
+          <Table.Cell>{user.username}</Table.Cell>
+          <Table.Cell>{user.email}</Table.Cell>
+          <Table.Cell><Button
+            className="admin__delete--user"
+            icon>
+            <Icon name='trash' />
+          </Button>
+          </Table.Cell>
+          </Table.Row>
+      ))}
+    </Table.Body>
 
-  </List>
+    <Table.Footer>
+      <Table.Row>
+        <Table.HeaderCell colSpan='3'>
+          <Menu floated='right' pagination>
+            <Menu.Item as='a' icon>
+              <Icon name='chevron left' />
+            </Menu.Item>
+            <Menu.Item as='a'>1</Menu.Item>
+            <Menu.Item as='a'>2</Menu.Item>
+            <Menu.Item as='a' icon>
+              <Icon name='chevron right' />
+            </Menu.Item>
+          </Menu>
+        </Table.HeaderCell>
+      </Table.Row>
+    </Table.Footer>
+  </Table>
   </div>
     );
   }
 }
 AdminPanel.propTypes = {
-  fetchUser: PropTypes.func.isRequired,
+  fetchUsers: PropTypes.func.isRequired,
   users: PropTypes.array.isRequired,
 };
 
