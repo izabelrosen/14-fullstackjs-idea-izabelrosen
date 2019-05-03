@@ -2,6 +2,9 @@ import {
   FETCH_USER_START,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILURE,
+  DELETE_USER_START,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
 } from '../Constants';
 
 const initialState = {
@@ -31,6 +34,25 @@ export const user = (state = initialState, action) => {
         ...state,
         isFetching: false,
       };
+
+    case DELETE_USER_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        user: action.payload,
+      };
+
+    case DELETE_USER_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+      };
+
     default:
       return state;
   }
