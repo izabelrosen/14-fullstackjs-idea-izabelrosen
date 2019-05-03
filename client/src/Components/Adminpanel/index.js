@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/no-deprecated */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -6,12 +7,22 @@ import { connect } from 'react-redux';
 import {
   Button, Icon, Menu, Table,
 } from 'semantic-ui-react';
-import { fetchUsers } from '../../Actions/user';
+import { fetchUsers, deleteUser } from '../../Actions/user';
 import './style.css';
 
 class AdminPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.deleteUser = this.deleteUser.bind(this);
+  }
+
   componentWillMount = () => {
     this.props.fetchUsers();
+  }
+
+  deleteUser(id) {
+    // e.preventDefault();
+    this.props.deleteUser(id);
   }
 
   render() {
@@ -28,11 +39,14 @@ class AdminPanel extends Component {
 
     <Table.Body>
       { this.props.users.map(user => (
-        <Table.Row key={user.id}>
+        <Table.Row key={user._id}>
           <Table.Cell>{user.username}</Table.Cell>
           <Table.Cell>{user.email}</Table.Cell>
           <Table.Cell><Button
             className="admin__delete--user"
+            // parentheses: otherwise it looks for a user id when render
+            // only when on click we need to know which user id
+            onClick={() => this.deleteUser(user._id)}
             icon>
             <Icon name='trash' />
           </Button>
@@ -64,10 +78,11 @@ class AdminPanel extends Component {
 }
 AdminPanel.propTypes = {
   fetchUsers: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
   users: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({
   users: state.user.users,
 });
-export default connect(mapStateToProps, { fetchUsers })(AdminPanel);
+export default connect(mapStateToProps, { fetchUsers, deleteUser })(AdminPanel);
