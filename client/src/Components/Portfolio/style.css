@@ -1,0 +1,14 @@
+#landingPage {
+  min-height: 100vh;
+  background-color: aquamarine;
+}
+
+#projects {
+  min-height: 100vh;
+  background-color: blueviolet;
+}
+
+#aboutMe {
+  min-height: 100vh;
+  background-color: bisque;
+}
