@@ -12,6 +12,7 @@ import SignUp from '../Views/Site/SignUp';
 import AllChats from '../Views/Site/AllChats';
 import MyChat from '../Views/Site/MyChat';
 import PrivateRoute from './Auth';
+import Dashboard from '../Views/Admin/Dashboard';
 
 /*  eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 
@@ -34,6 +35,7 @@ class App extends Component {
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
             <PrivateRoute exact path="/allchats" component={AllChats} />
+            <PrivateRoute exact path="/admin" component={Dashboard} />
             <Route exact path="/mychat" component={MyChat} />
           </Switch>
           </div>

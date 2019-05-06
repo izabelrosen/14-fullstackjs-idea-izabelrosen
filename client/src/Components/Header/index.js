@@ -62,22 +62,32 @@ class Header extends Component {
           : [
             <Menu.Item
               as={ Link }
-              to='/signin'
-              name='logout'
-              active={activeItem === 'logout'}
-              onClick={this.handleLogOut}
-            >
-              Log out
-            </Menu.Item>,
-
-            <Menu.Item
-              as={ Link }
               to='/allchats'
               name='allchats'
               active={activeItem === 'allchats'}
               onClick={this.handleItemClick}
             >
               Chat
+            </Menu.Item>,
+
+            <Menu.Item
+            as={ Link }
+            to='/admin'
+            name='adminpanel'
+            active={activeItem === 'adminpanel'}
+            onClick={this.handleItemClick}
+            >
+              Admin
+            </Menu.Item>,
+
+            <Menu.Item
+            as={ Link }
+            to='/signin'
+            name='logout'
+            active={activeItem === 'logout'}
+            onClick={this.handleLogOut}
+            >
+              Log out
             </Menu.Item>,
           ]}
         </Menu>

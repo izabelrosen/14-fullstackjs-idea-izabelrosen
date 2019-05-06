@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 // if not authenticated: redirect to signin
 const PrivateRoute = ({
   component: Component,
-  auth: { isAuthenticated, loading },
+  auth: { isAuthenticated, isFetching },
   ...rest
 }) => (
     <Route
-    { ...rest } render={props => (!isAuthenticated && !loading ? (
+    { ...rest } render={props => (!isAuthenticated && !isFetching ? (
       <Redirect to='/signin' />) : (<Component { ...props } />))} />
 );
 
