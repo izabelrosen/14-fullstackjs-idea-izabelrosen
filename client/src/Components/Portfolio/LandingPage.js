@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Header, Button } from 'semantic-ui-react';
 import Parallax from 'parallax-js';
+import moon from './Pics/moon.png';
 import './style.css';
 
 export default class LandingPage extends Component {
@@ -37,11 +38,14 @@ export default class LandingPage extends Component {
         <Header as='h2' icon textAlign='center'>
           <Header.Content>Izabel Rosen</Header.Content>
         </Header>
-        <Button onClick={() => this.myProjects()}>Projects</Button>
-        <Button onClick={() => this.aboutMe()}>About</Button>
         <div id="scene">
           <div data-depth="0.2">My first Layer!</div>
           <div data-depth="0.6">My second Layer!</div>
+          <img className="moon" data-depth="0.8" src={moon} alt="moon" />
+        </div>
+        <div className="landingPage__buttons">
+          <Button id="rotateLeft" inverted onClick={() => this.myProjects()}>Projects</Button>
+          <Button id="rotateRight" inverted onClick={() => this.aboutMe()}>About</Button>
         </div>
       </section>
     );
