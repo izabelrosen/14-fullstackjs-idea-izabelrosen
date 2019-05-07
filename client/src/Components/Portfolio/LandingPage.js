@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { Header, Button } from 'semantic-ui-react';
 import Parallax from 'parallax-js';
 import moon from './Pics/moon.png';
+import mynamei from './Pics/mynamei.svg';
+import mynamezab from './Pics/mynamezab.svg';
+import mynameel from './Pics/mynameel.svg';
 import './style.css';
 
 export default class LandingPage extends Component {
@@ -35,13 +38,15 @@ export default class LandingPage extends Component {
   render() {
     return (
       <section id="landingPage">
-        <Header as='h2' icon textAlign='center'>
-          <Header.Content>Izabel Rosen</Header.Content>
-        </Header>
+        <button className="buttonProject" onClick ={() => this.myProjects()}>Projects</button>
+        <button className="buttonaboutMe" onClick ={() => this.aboutMe()}>About</button>
         <div id="scene">
-          <div data-depth="0.2">My first Layer!</div>
-          <div data-depth="0.6">My second Layer!</div>
           <img className="moon" data-depth="0.8" src={moon} alt="moon" />
+        </div>
+        <div className="myName">
+          <img className="myName_i" data-depth="0.8" src={mynamei} alt="myname_i" />
+          <img className="myName_zab" data-depth="0.8" src={mynamezab} alt="myname_zab" />
+          <img className="myName_el" data-depth="0.8" src={mynameel} alt="myname_el" />
         </div>
         <div className="landingPage__buttons">
           <Button id="rotateLeft" inverted onClick={() => this.myProjects()}>Projects</Button>
