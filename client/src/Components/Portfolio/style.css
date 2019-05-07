@@ -1,14 +1,31 @@
 #landingPage {
+  position: relative;
   min-height: 100vh;
-  background-color: aquamarine;
+  background: url(./Pics/landingbackg.jpg);
+  /* background-size: cover; */
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #projects {
   min-height: 100vh;
-  background-color: blueviolet;
+  background: url(./Pics/projectsbackg.jpg);
+  /* background-size: cover; */
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #aboutMe {
   min-height: 100vh;
   background-color: bisque;
+}
+
+#scene {
+  color: pink;
 }
