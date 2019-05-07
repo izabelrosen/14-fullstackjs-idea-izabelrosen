@@ -2,8 +2,6 @@
   position: relative;
   min-height: 100vh;
   background: url(./Pics/landingbackg.jpg);
-  /* background-size: cover; */
-
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -13,8 +11,6 @@
 #projects {
   min-height: 100vh;
   background: url(./Pics/projectsbackg.jpg);
-  /* background-size: cover; */
-
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -28,4 +24,36 @@
 
 #scene {
   color: pink;
+}
+
+.moon {
+  width: 10%;
+  margin-left: 200px;
+}
+
+.landingPage__buttons {
+  display: flex;
+    height: 100;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+}
+
+#rotateRight{
+  flex-direction: column;
+  margin-left: auto;
+  align-self: center;
+  transform:rotate(7deg);
+  -ms-transform:rotate(90deg); /* IE 9 */
+  -moz-transform:rotate(90deg); /* Firefox */
+  -webkit-transform:rotate(90deg); /* Safari and Chrome */
+  -o-transform:rotate(90deg); /* Opera */
+}
+#rotateLeft{
+  align-self: center;
+  transform:rotate(-7deg);
+  -ms-transform:rotate(-90deg); /* IE 9 */
+  -moz-transform:rotate(-90deg); /* Firefox */
+  -webkit-transform:rotate(-90deg); /* Safari and Chrome */
+  -o-transform:rotate(-90deg); /* Opera */
 }
