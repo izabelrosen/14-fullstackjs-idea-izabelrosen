@@ -54,10 +54,11 @@ export const messages = (state = initialState, action) => {
 
     case NEW_MESSAGE_SUCCESS:
       console.log('reducer ONE msg');
+      console.log(action.payload);
       return {
         ...state,
-        // messages: [...state.messages, action.payload],
-        message: action.payload,
+        messages: [...state.messages, action.payload.newMessage],
+        // message: action.payload,
         isFetching: false,
       };
 
