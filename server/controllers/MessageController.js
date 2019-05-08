@@ -14,6 +14,7 @@ router.post('/', function(req, res) {
             });
         }
         res.status(200).send({
+            newMessage,
             message: 'New message successfully created: ' + messages.text
         });
     })
