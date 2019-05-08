@@ -3,7 +3,7 @@ import AllChatsList from '../../Components/Forms/AllChatsList';
 import CreateMessage from '../../Components/Forms/CreateMessage';
 
 const AllChats = () => (
-  <div className="AllChats">
+  <div className="myChat">
     <AllChatsList />
     <CreateMessage />
   </div>
