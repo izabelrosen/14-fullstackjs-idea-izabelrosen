@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../App';
 import { connect } from 'react-redux';
+import io from 'socket.io-client';
 import { fetchMessages } from '../../Actions/message';
 
 // This doesnot work by adding to allow's..
@@ -15,6 +16,14 @@ class AllChatsList extends Component {
     this.props.fetchMessages();
   }
 
+  componentDidMount = () => {
+    const socket = io.connect('http://localhost:3003');
+    // const socket = io.connect('http://localhost:3003', {transports: ['websocket']});
+    socket.on('connect', () => {
+      console.log('socket?');
+    })
+  }
+
   // ** Auto update: Why doesnt this work? Do I even need it? Socket will handle it?
   // problem is when creating a new message it saves but only as a new message
   // But after reloading the page it adds to the array with the rest of info
@@ -26,7 +35,7 @@ class AllChatsList extends Component {
 
   render() {
     const messageItems = this.props.messages.map(message => (
-      <div key={message.id}>
+      <div key={message._id}>
         <h3>{message.text}</h3>
       </div>
     ));
