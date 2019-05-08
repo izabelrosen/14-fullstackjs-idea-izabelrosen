@@ -2,14 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
-
-// WIP: detta ska skrivas ut i terminalen
-io.on('connection', function(socket) {
-    console.log('A user is connected! YAY');
-});
-
-
+const socket = require('socket.io');
 
 // TODO: This does not work. Must be a string?
 // const mongoUser = process.env.MONGO_USER;
@@ -59,7 +52,18 @@ app.use(function(error, req, res, next) {
     res.status(error.status || 500).send({'error': 'Oups something went wrong!'})
 });
 
-app.listen(3333);
-console.log('Magic is happening over at 3333');
+var port = 3003;
+const server = app.listen(port, function() {
+    console.log('Express is now listening to port: ' + port);
+});
+
+var io = socket(server);
+
+io.on('connection', function(io) {
+    console.log('A user is connected! YAY');
+});
+
+// app.listen(3333);
+// console.log('Magic is happening over at 3333');
 
 module.exports = app;
