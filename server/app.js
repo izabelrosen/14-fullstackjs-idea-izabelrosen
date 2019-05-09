@@ -60,10 +60,23 @@ const server = app.listen(port, function() {
 var io = socket(server);
 
 io.on('connection', function(socket) {
-    console.log('A user is connected! YAY');
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-      });
+  console.log('A user is connected! YAY');
+
+  sendStatus = function(s) {
+    socket.emit('status', s);
+  }
+
+  socket.on('chat message', function(msg) {
+    console.log('message: ' + JSON.stringify(msg));
+
+    sendStatus({
+      message: 'Message sent'
+    });
+  })
+
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
 });
 
 // app.listen(3333);
