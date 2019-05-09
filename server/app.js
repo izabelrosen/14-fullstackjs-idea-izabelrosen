@@ -59,8 +59,11 @@ const server = app.listen(port, function() {
 
 var io = socket(server);
 
-io.on('connection', function(io) {
+io.on('connection', function(socket) {
     console.log('A user is connected! YAY');
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+      });
 });
 
 // app.listen(3333);
