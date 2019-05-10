@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import { authHelper } from '../Helpers/auth';
 import {
   FETCH_MESSAGES_START,
   FETCH_MESSAGES_SUCCESS,
@@ -56,9 +57,7 @@ export const newMessage = (message) => (dispatch) => {
   console.log('fetching one message??');
   fetch(url, {
   method: 'POST',
-  headers: {
-    'content-type': 'application/json',
-  },
+  headers: authHelper(),
   body: JSON.stringify(message),
 })
   .then(res => res.json())
