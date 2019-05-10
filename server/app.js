@@ -61,22 +61,14 @@ var io = socket(server);
 
 io.on('connection', function(socket) {
   console.log('A user is connected! YAY');
-
-  sendStatus = function(s) {
-    socket.emit('status', s);
-  }
-
-  socket.on('chat message', function(msg) {
-    console.log('message: ' + JSON.stringify(msg));
-
-    sendStatus({
-      message: 'Message sent'
-    });
-  })
-
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
+
+  socket.on('send_chat_message', function(msg) {
+    io.emit('new_chat_message', msg);
+    console.log('message: ', msg.text);
+  })
 });
 
 // app.listen(3333);
