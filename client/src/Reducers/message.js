@@ -57,8 +57,7 @@ export const messages = (state = initialState, action) => {
       console.log(action.payload);
       return {
         ...state,
-        messages: [...state.messages, action.payload.newMessage],
-        // message: action.payload,
+        messages: [...state.messages, action.payload],
         isFetching: false,
       };
 
