@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import '../App';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
-import { fetchMessages } from '../../Actions/message';
+import { fetchMessages, socketMessage } from '../../Actions/message';
+
+const socket = io.connect('http://localhost:3003');
 
 // This doesnot work by adding to allow's..
 // /* eslint camelcase: ["error", {allow: ["UNSAFE_componentWillMount",
@@ -11,18 +13,14 @@ import { fetchMessages } from '../../Actions/message';
 /* eslint-disable */
 class AllChatsList extends Component {
   UNSAFE_componentWillMount = () => {
-    // let { dispatch } = this.props;
-    // dispatch(fetchMessages());
     this.props.fetchMessages();
   }
 
   componentDidMount = () => {
-    const socket = io.connect('http://localhost:3003');
-    // const socket = io.connect('http://localhost:3003', {transports: ['websocket']});
-    socket.on('connect', () => {
-      console.log('socket?');
+    socket.on('new_chat_message', (msg) => {
+      this.props.socketMessage(msg);
     })
-  }
+  };
 
   // ** Auto update: Why doesnt this work? Do I even need it? Socket will handle it?
   // problem is when creating a new message it saves but only as a new message
@@ -50,6 +48,7 @@ class AllChatsList extends Component {
 // messages from the root reducer, items from message reducer
 AllChatsList.propTypes = {
   fetchMessages: PropTypes.func.isRequired,
+  socketMessage: PropTypes.func.isRequired,
   messages: PropTypes.array.isRequired,
   newMessage: PropTypes.object,
 };
@@ -58,4 +57,4 @@ const mapStateToProps = state => ({
   messages: state.messages.messages,
   newMessage: state.messages.message,
 });
-export default connect(mapStateToProps, { fetchMessages })(AllChatsList);
+export default connect(mapStateToProps, { fetchMessages, socketMessage })(AllChatsList);
