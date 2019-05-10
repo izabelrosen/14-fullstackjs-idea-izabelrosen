@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
-// import { withRouter } from 'react-router-dom';
 import '../App';
 import { Form, TextArea, Button } from 'semantic-ui-react';
 import { newMessage } from '../../Actions/message';
@@ -20,21 +18,6 @@ class CreateMessage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // componentDidMount = () => {
-  //   this.initSocket();
-  //   const socket = io.connect('http://localhost:3003');
-  //   socket.on('connect', () => {
-  //     console.log('socket createMessage');
-  //   });
-  // }
-
-  // initSocket = () => {
-  //   const socket = io.connect('http://localhost:3003');
-  //   socket.on('connect', () => {
-  //     console.log('socket createMessage');
-  //   });
-  // }
-
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -45,12 +28,6 @@ class CreateMessage extends Component {
     const message = {
       text: this.state.text,
     };
-    const socket = io.connect('http://localhost:3003');
-    socket.on('connect', () => {
-      console.log('socket createMessage');
-    });
-    socket.emit('chat message', message);
-    console.log(message);
 
     // Clear input field after sending msg
     if (this.state.text) {
