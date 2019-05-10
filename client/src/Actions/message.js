@@ -1,3 +1,4 @@
+import io from 'socket.io-client';
 import {
   FETCH_MESSAGES_START,
   FETCH_MESSAGES_SUCCESS,
@@ -7,6 +8,7 @@ import {
   NEW_MESSAGE_FAILURE,
 } from '../Constants';
 
+const socket = io.connect('http://localhost:3003');
 // each action creator is a function that needs to export
 // thunk middleware: call the dispatch function = make async req
 // dispatch: is like a resolver/promise: want to send data call dispatch
@@ -60,8 +62,12 @@ export const newMessage = (message) => (dispatch) => {
   body: JSON.stringify(message),
 })
   .then(res => res.json())
-  .then(message => dispatch({
-    type: NEW_MESSAGE_SUCCESS,
-    payload: message,
-  }));
+  .then(message => {
+    socket.emit('send_chat_message', message.messages)
+  })
 };
+
+export const socketMessage = (message) => ({
+  type: NEW_MESSAGE_SUCCESS,
+  payload: message,
+});
