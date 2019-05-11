@@ -12,8 +12,10 @@ class CreateMessage extends Component {
 
     this.state = {
       text: '',
+      user: JSON.parse(localStorage.getItem('user')),
       socket: '',
     };
+    console.log('User:', this.state.user.username);
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -27,7 +29,9 @@ class CreateMessage extends Component {
 
     const message = {
       text: this.state.text,
+      user: this.state.user.username,
     };
+    console.log(message);
 
     // Clear input field after sending msg
     if (this.state.text) {
