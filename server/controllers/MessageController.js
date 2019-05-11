@@ -15,7 +15,7 @@ router.post('/', verifyToken, function(req, res) {
                 message: error
             });
         }
-        messages.populate('user', '_id username profile_picture', function(err, message) {
+        messages.populate('user', '-password', function(err, message) {
             res.status(200).send({
                 messages: message,
             })
@@ -25,13 +25,13 @@ router.post('/', verifyToken, function(req, res) {
 
 // Read - get all messages
 router.get('/', function(req, res) {
-    Message.find({}, function(error, messages) {
-        if(error) {
-            return res.status(500).send('An error occured. Could not get the messages...');
-        } else {
-            res.status(200).send(messages);
-        }
-    })
+  Message.find().populate('user', '-password').exec(function(error, messages) {
+    if(error) {
+        return res.status(500).send('An error occured. Could not get the messages...');
+    } else {
+        res.status(200).send(messages);
+    }
+  })
 });
 
 // Read - get messages by id
