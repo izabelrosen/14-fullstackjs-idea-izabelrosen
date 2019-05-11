@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 // Describe a message
 var MessageSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now},
-    user: [{
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }],
+    },
     text: String,
 });
 
