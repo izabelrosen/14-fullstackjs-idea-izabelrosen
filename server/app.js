@@ -37,9 +37,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-// Add express to use the routes??
-// const app = express();
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -67,11 +64,8 @@ io.on('connection', function(socket) {
 
   socket.on('send_chat_message', function(msg) {
     io.emit('new_chat_message', msg);
-    console.log('message: ', msg.text);
+    console.log('message: ', msg);
   })
 });
-
-// app.listen(3333);
-// console.log('Magic is happening over at 3333');
 
 module.exports = app;
