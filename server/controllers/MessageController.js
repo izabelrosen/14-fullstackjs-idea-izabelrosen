@@ -1,21 +1,25 @@
 const express = require('express');
 const router = express.Router();
-
+const verifyToken = require('../middleware/TokenVerify');
 const Message = require('../models/Message');
 
 // Create a message
-router.post('/', function(req, res) {
+router.post('/', verifyToken, function(req, res) {
     const newMessage = new Message();
     newMessage.text = req.body.text;
+    newMessage.user = req.userId;
+    console.log(req.userId);
     newMessage.save(function(error, messages) {
         if (error) {
             res.status(500).send({
                 message: error
             });
         }
-        res.status(200).send({
-            messages,
-        });
+        messages.populate('user', '_id username profile_picture', function(err, message) {
+            res.status(200).send({
+                messages: message,
+            })
+        })
     })
 });
 
